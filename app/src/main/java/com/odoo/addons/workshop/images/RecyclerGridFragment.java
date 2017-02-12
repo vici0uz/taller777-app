@@ -31,11 +31,7 @@ public class RecyclerGridFragment extends Fragment {
     private String imgBruto;
     private ArrayList<String> arregloImagenes;
     public DataAdapter dataAdapter;
-    UpdateFrag mCallback;
 
-    public interface UpdateFrag{
-        public void onUpFrag(int pos, String msg);
-    }
     public RecyclerGridFragment(){
     }
 
@@ -101,17 +97,7 @@ public class RecyclerGridFragment extends Fragment {
 
 
 
-    @Override
-    public void onAttach(Activity activity){
-        super.onAttach(activity);
-        try{
-            mCallback = (UpdateFrag) activity;
 
-        }catch (ClassCastException e){
-            throw new ClassCastException(activity.toString()+ " must implement UpdateFrag");
-        }
-
-    }
 
     public void updateFrag(String msg){
         arregloImagenes.clear();

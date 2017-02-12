@@ -48,7 +48,7 @@ import okhttp3.Response;
  * Created by alan on 26/01/17.
  */
 
-public class ImagesActivity extends AppCompatActivity implements RecyclerGridFragment.UpdateFrag {
+public class ImagesActivity extends AppCompatActivity  {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -70,7 +70,7 @@ public class ImagesActivity extends AppCompatActivity implements RecyclerGridFra
     private String field;
     private Pager mAdapter;
     HashMap<Integer,RecyclerGridFragment> mPageReferenceMap;
-
+    private String images;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +91,7 @@ public class ImagesActivity extends AppCompatActivity implements RecyclerGridFra
         record = workshopService.browse(rowId);
         getSupportActionBar().setTitle(record.getString("name"));
 
-        prepareData(imgs);
+//        prepareData(imgs);
 
         setupViewPager(viewPager);
 
@@ -111,17 +111,16 @@ public class ImagesActivity extends AppCompatActivity implements RecyclerGridFra
     }
 
     private void setupViewPager(ViewPager viewPager) {
-         mAdapter = new Pager(getSupportFragmentManager());
+        mAdapter = new Pager(getSupportFragmentManager());
         mAdapter.addFrag(new RecyclerGridFragment(getResources().getColor(android.support.design.R.color.button_material_dark), imgs[0]), "Presupuesto");
         mAdapter.addFrag(new RecyclerGridFragment(getResources().getColor(android.support.design.R.color.button_material_dark), imgs[1]), "Recepción");
         mAdapter.addFrag(new RecyclerGridFragment(getResources().getColor(android.support.design.R.color.button_material_dark), imgs[2]), "Entrega");
         viewPager.setAdapter(mAdapter);
-
         viewPager.setCurrentItem(1);
     }
 
     private void prepareData(String[] imgs) {
-        String images = imgs[1];
+        images = imgs[1];
         JSONParser parser = new JSONParser();
         arregloImagenes = new ArrayList<String>();
         try {
@@ -175,7 +174,9 @@ public class ImagesActivity extends AppCompatActivity implements RecyclerGridFra
                     OkHttpClient client = new OkHttpClient();
                     MultipartBody.Builder builderNew = new MultipartBody.Builder()
                             .setType(MultipartBody.FORM);
-
+                    if(imgs[tabLayout.getSelectedTabPosition()].length()>1){
+                        builderNew.addFormDataPart("images", imgs[tabLayout.getSelectedTabPosition()]);
+                    }
                     for (Uri uri : uris) {
                         File f = new File(uri.getPath());
                         if (f.exists()) {
@@ -217,7 +218,6 @@ public class ImagesActivity extends AppCompatActivity implements RecyclerGridFra
                                     @Override
                                     public void run() {
                                         Toast.makeText(ImagesActivity.this, "Las imagenes se guardaron correctamente.", Toast.LENGTH_SHORT).show();
-//                                        Snackbar.make("Las imagenes se subieron correctamente", Snackbar.LENGTH_LONG);
                                         RecyclerGridFragment frag = (RecyclerGridFragment) mAdapter.getItem(tabPos);
                                         frag.updateFrag(msg);
 
@@ -233,30 +233,5 @@ public class ImagesActivity extends AppCompatActivity implements RecyclerGridFra
             }
         }
     }
-
-    @Override
-    public void onUpFrag(int pos, String msg) {
-        Fragment fr = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.recycler_fragment + ":" + viewPager.getCurrentItem());
-
-    }
-
-
-//    public class MyAdapter extends FragmentStatePagerAdapter {
-//        public MyAdapter(FragmentManager fm) {
-//            super(fm);
-//        }
-//
-//        @Override
-//        public Fragment getItem(int position) {
-//            return null;
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return 0;
-//        }
-//    }
-
-
 }
 
