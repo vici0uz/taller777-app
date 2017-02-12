@@ -24,6 +24,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 import com.odoo.BuildConfig;
+import com.odoo.addons.workshop.models.WorkshopVehicle;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.OValues;
@@ -73,6 +74,9 @@ public class ResPartner extends OModel {
 
     OColumn child_ids = new OColumn("Contacts", ResPartner.class, OColumn.RelationType.OneToMany)
             .setRelatedColumn("parent_id");
+//    Custom
+    OColumn cid = new OColumn("Certficate Number", OVarchar.class).setSize(15);
+    OColumn insurer = new OColumn("Insurer?", OBoolean.class);
 
     public ResPartner(Context context, OUser user) {
         super(context, "res.partner", user);

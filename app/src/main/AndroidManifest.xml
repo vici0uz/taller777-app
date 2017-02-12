@@ -25,7 +25,7 @@
         android:name="com.odoo.App"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_custom"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
@@ -102,6 +102,39 @@
         <activity
             android:name="com.odoo.addons.customers.CustomerDetails"
             android:windowSoftInputMode="adjustPan" />
+
+
+
+        <!--WORKSHOP-->
+        <provider
+            android:name="com.odoo.addons.workshop.providers.WServiceSyncProvider"
+            android:authorities="com.odoo.addons.workshop.content.sync.workshop_service"
+            android:label="Services"
+            android:multiprocess="true"/>
+
+        <service android:name="com.odoo.addons.workshop.services.WServiceSyncService"
+            android:exported="true"
+            android:process=":sync_services">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/wservice_sync_adapter"/>
+        </service>
+
+        <activity
+            android:name=".addons.workshop.ServiceDetails"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity android:name=".addons.workshop.images.ImagesActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+
+        <activity android:name=".addons.workshop.images.ImageFull"/>
+
+        <activity android:name="nl.changer.polypicker.ImagePickerActivity"/>
     </application>
 
 </manifest>

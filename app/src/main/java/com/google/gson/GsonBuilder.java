@@ -166,7 +166,7 @@ public final class GsonBuilder {
    * apply:
    *
    * <h3>Maps as JSON objects</h3>
-   * For this case, assume that a type adapter is registered to serialize and
+   * For this case, assume that a type dataAdapter is registered to serialize and
    * deserialize some {@code Point} class, which contains an x and y coordinate,
    * to/from the JSON Primitive string value {@code "(x,y)"}. The Java map would
    * then be serialized as a {@link JsonObject}.
@@ -191,7 +191,7 @@ public final class GsonBuilder {
    * }</pre>
    *
    * <h3>Maps as JSON arrays</h3>
-   * For this case, assume that a type adapter was NOT registered for some
+   * For this case, assume that a type dataAdapter was NOT registered for some
    * {@code Point} class, but rather the default Gson serialization is applied.
    * In this case, some {@code new Point(2,3)} would serialize as {@code
    * {"x":2,"y":5}}.
@@ -431,14 +431,14 @@ public final class GsonBuilder {
    * Configures Gson for custom serialization or deserialization. This method combines the
    * registration of an {@link TypeAdapter}, {@link InstanceCreator}, {@link JsonSerializer}, and a
    * {@link JsonDeserializer}. It is best used when a single object {@code typeAdapter} implements
-   * all the required interfaces for custom serialization with Gson. If a type adapter was
+   * all the required interfaces for custom serialization with Gson. If a type dataAdapter was
    * previously registered for the specified {@code type}, it is overwritten.
    *
    * <p>This registers the type specified and no other types: you must manually register related
    * types! For example, applications registering {@code boolean.class} should also register {@code
    * Boolean.class}.
    *
-   * @param type the type definition for the type adapter being registered
+   * @param type the type definition for the type dataAdapter being registered
    * @param typeAdapter This object must implement at least one of the {@link TypeAdapter},
    * {@link InstanceCreator}, {@link JsonSerializer}, and a {@link JsonDeserializer} interfaces.
    * @return a reference to this {@code GsonBuilder} object to fulfill the "Builder" pattern
@@ -464,9 +464,9 @@ public final class GsonBuilder {
 
   /**
    * Register a factory for type adapters. Registering a factory is useful when the type
-   * adapter needs to be configured based on the type of the field being processed. Gson
+   * dataAdapter needs to be configured based on the type of the field being processed. Gson
    * is designed to handle a large number of factories, so you should consider registering
-   * them to be at par with registering an individual type adapter.
+   * them to be at par with registering an individual type dataAdapter.
    *
    * @since 2.1
    */
@@ -478,11 +478,11 @@ public final class GsonBuilder {
   /**
    * Configures Gson for custom serialization or deserialization for an inheritance type hierarchy.
    * This method combines the registration of a {@link TypeAdapter}, {@link JsonSerializer} and
-   * a {@link JsonDeserializer}. If a type adapter was previously registered for the specified
-   * type hierarchy, it is overridden. If a type adapter is registered for a specific type in
+   * a {@link JsonDeserializer}. If a type dataAdapter was previously registered for the specified
+   * type hierarchy, it is overridden. If a type dataAdapter is registered for a specific type in
    * the type hierarchy, it will be invoked instead of the one registered for the type hierarchy.
    *
-   * @param baseType the class definition for the type adapter being registered for the base class
+   * @param baseType the class definition for the type dataAdapter being registered for the base class
    *        or interface
    * @param typeAdapter This object must implement at least one of {@link TypeAdapter},
    *        {@link JsonSerializer} or {@link JsonDeserializer} interfaces.

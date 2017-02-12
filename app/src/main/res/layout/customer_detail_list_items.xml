@@ -34,7 +34,8 @@
                 app:fieldLabelColor="@color/theme_secondary"
                 app:fieldName="website"
                 app:fieldTextAppearance="?android:textAppearanceMedium"
-                app:iconResource="@drawable/ic_action_universe"></odoo.controls.OField>
+                app:iconResource="@drawable/ic_action_universe"
+                android:visibility="gone"></odoo.controls.OField>
 
 
             <odoo.controls.OField
@@ -45,6 +46,13 @@
                 app:fieldName="email"
                 app:fieldTextAppearance="?android:textAppearanceMedium"
                 app:iconResource="@drawable/ic_action_message"></odoo.controls.OField>
+
+            <odoo.controls.OField
+                android:id="@+id/cid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fieldName="cid"
+                app:fieldTextAppearance="?android:textAppearanceMedium" ></odoo.controls.OField>
 
             <View
                 style="@style/ViewSeparator"
@@ -94,7 +102,8 @@
                 android:layout_height="wrap_content"
                 app:fieldLabelColor="@color/theme_secondary"
                 app:fieldName="country_id"
-                app:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
+                app:fieldTextAppearance="?android:textAppearanceMedium"
+                android:visibility="gone"></odoo.controls.OField>
 
             <View
                 style="@style/ViewSeparator"
@@ -195,14 +204,16 @@
                     android:layout_height="wrap_content"
                     app:fieldName="state_id"
                     app:widgetType="SearchableLive"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
+                    app:fieldTextAppearance="?android:textAppearanceMedium"
+                    android:visibility="gone"></odoo.controls.OField>
 
                 <odoo.controls.OField
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:fieldName="country_id"
                     app:fieldTextAppearance="?android:textAppearanceMedium"
-                    app:widgetType="SearchableLive"></odoo.controls.OField>
+                    app:widgetType="SearchableLive"
+                    android:visibility="gone"></odoo.controls.OField>
 
                 <View
                     style="@style/ViewSeparator"
@@ -220,7 +231,8 @@
                     android:layout_height="wrap_content"
                     app:fieldName="website"
                     app:fieldTextAppearance="?android:textAppearanceMedium"
-                    app:iconResource="@drawable/ic_action_universe"></odoo.controls.OField>
+                    app:iconResource="@drawable/ic_action_universe"
+                    android:visibility="gone"></odoo.controls.OField>
 
                 <View
                     style="@style/ViewSeparator"

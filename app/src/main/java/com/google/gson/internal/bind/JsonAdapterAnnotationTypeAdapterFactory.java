@@ -25,7 +25,7 @@ import com.google.gson.reflect.TypeToken;
 
 /**
  * Given a type T, looks for the annotation {@link JsonAdapter} and uses an instance of the
- * specified class as the default type adapter.
+ * specified class as the default type dataAdapter.
  *
  * @since 2.3
  */

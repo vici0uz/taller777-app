@@ -44,3 +44,24 @@
 -keep class * extends com.odoo.core.orm.OModel{*;}
 # Searchview v4
 -keep class android.support.v7.widget.SearchView { *; }
+
+#Custom
+-keepattributes SourceFile,LineNumberTable
+-keep class com.parse.*{ *; }
+-dontwarn com.parse.**
+-dontwarn com.squareup.picasso.**
+-dontwarn okio.**
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+-dontwarn android.test.**
+-dontwarn com.xhaus.**
+-dontwarn org.xmlpull.**
+-dontwarn org.fusesource.**
+-dontwarn jnr.posix.**
+-dontwarn jnr.ffi.provider.**
+-dontwarn com.kenai.**
+-dontwarn com.ziclix.**
+-dontwarn android.util.Xml
+-dontwarn org.junit.**
+-dontwarn com.fasterxml.**

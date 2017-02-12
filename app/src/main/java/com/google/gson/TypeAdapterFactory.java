@@ -19,7 +19,7 @@ package com.google.gson;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Creates type adapters for set of related types. Type adapter factories are
+ * Creates type adapters for set of related types. Type dataAdapter factories are
  * most useful when several types share similar structure in their JSON form.
  *
  * <h3>Example: Converting enums to lowercase</h3>
@@ -66,7 +66,7 @@ import com.google.gson.reflect.TypeToken;
  *   }
  * }</pre>
  *
- * <p>Type adapter factories select which types they provide type adapters
+ * <p>Type dataAdapter factories select which types they provide type adapters
  * for. If a factory cannot support a given type, it must return null when
  * that type is passed to {@link #create}. Factories should expect {@code
  * create()} to be called on them for many types and should return null for
@@ -74,8 +74,8 @@ import com.google.gson.reflect.TypeToken;
  * calls to {@code create()} where {@code type} is not an enum.
  *
  * <p>A factory is typically called once per type, but the returned type
- * adapter may be used many times. It is most efficient to do expensive work
- * like reflection in {@code create()} so that the type adapter's {@code
+ * dataAdapter may be used many times. It is most efficient to do expensive work
+ * like reflection in {@code create()} so that the type dataAdapter's {@code
  * read()} and {@code write()} methods can be very fast. In this example the
  * mapping from lowercase name to enum value is computed eagerly.
  *
@@ -93,11 +93,11 @@ import com.google.gson.reflect.TypeToken;
  * <h3>Example: composing other type adapters</h3>
  * In this example we implement a factory for Guava's {@code Multiset}
  * collection type. The factory can be used to create type adapters for
- * multisets of any element type: the type adapter for {@code
- * Multiset<String>} is different from the type adapter for {@code
+ * multisets of any element type: the type dataAdapter for {@code
+ * Multiset<String>} is different from the type dataAdapter for {@code
  * Multiset<URL>}.
  *
- * <p>The type adapter <i>delegates</i> to another type adapter for the
+ * <p>The type dataAdapter <i>delegates</i> to another type dataAdapter for the
  * multiset elements. It figures out the element type by reflecting on the
  * multiset's type token. A {@code Gson} is passed in to {@code create} for
  * just this purpose: <pre>   {@code
@@ -152,10 +152,10 @@ import com.google.gson.reflect.TypeToken;
  *     }
  *   }
  * }</pre>
- * Delegating from one type adapter to another is extremely powerful; it's
+ * Delegating from one type dataAdapter to another is extremely powerful; it's
  * the foundation of how Gson converts Java objects and collections. Whenever
- * possible your factory should retrieve its delegate type adapter in the
- * {@code create()} method; this ensures potentially-expensive type adapter
+ * possible your factory should retrieve its delegate type dataAdapter in the
+ * {@code create()} method; this ensures potentially-expensive type dataAdapter
  * creation happens only once.
  *
  * @since 2.1
@@ -163,7 +163,7 @@ import com.google.gson.reflect.TypeToken;
 public interface TypeAdapterFactory {
 
   /**
-   * Returns a type adapter for {@code type}, or null if this factory doesn't
+   * Returns a type dataAdapter for {@code type}, or null if this factory doesn't
    * support {@code type}.
    */
   <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type);

@@ -103,10 +103,10 @@ public final class Gson {
 
   /**
    * This thread local guards against reentrant calls to getAdapter(). In
-   * certain object graphs, creating an adapter for a type may recursively
-   * require an adapter for the same type! Without intervention, the recursive
-   * lookup would stack overflow. We cheat by returning a proxy type adapter.
-   * The proxy is wired up once the initial adapter has been created.
+   * certain object graphs, creating an dataAdapter for a type may recursively
+   * require an dataAdapter for the same type! Without intervention, the recursive
+   * lookup would stack overflow. We cheat by returning a proxy type dataAdapter.
+   * The proxy is wired up once the initial dataAdapter has been created.
    */
   private final ThreadLocal<Map<TypeToken<?>, FutureTypeAdapter<?>>> calls
       = new ThreadLocal<Map<TypeToken<?>, FutureTypeAdapter<?>>>();
@@ -152,7 +152,7 @@ public final class Gson {
    *   <li>Gson provides default serialization and deserialization for Enums, {@link Map},
    *   {@link java.net.URL}, {@link java.net.URI}, {@link java.util.Locale}, {@link java.util.Date},
    *   {@link BigDecimal}, and {@link BigInteger} classes. If you would prefer
-   *   to change the default representation, you can do so by registering a type adapter through
+   *   to change the default representation, you can do so by registering a type dataAdapter through
    *   {@link GsonBuilder#registerTypeAdapter(Type, Object)}. </li>
    *   <li>The default Date format is same as {@link java.text.DateFormat#DEFAULT}. This format
    *   ignores the millisecond portion of the date during serialization. You can change
@@ -325,7 +325,7 @@ public final class Gson {
   }
 
   /**
-   * Returns the type adapter for {@code} type.
+   * Returns the type dataAdapter for {@code} type.
    *
    * @throws IllegalArgumentException if this GSON cannot serialize and
    *     deserialize {@code type}.
@@ -374,13 +374,13 @@ public final class Gson {
   }
 
   /**
-   * This method is used to get an alternate type adapter for the specified type. This is used
-   * to access a type adapter that is overridden by a {@link TypeAdapterFactory} that you
+   * This method is used to get an alternate type dataAdapter for the specified type. This is used
+   * to access a type dataAdapter that is overridden by a {@link TypeAdapterFactory} that you
    * may have registered. This features is typically used when you want to register a type
-   * adapter that does a little bit of work but then delegates further processing to the Gson
-   * default type adapter. Here is an example:
-   * <p>Let's say we want to write a type adapter that counts the number of objects being read
-   *  from or written to JSON. We can achieve this by writing a type adapter factory that uses
+   * dataAdapter that does a little bit of work but then delegates further processing to the Gson
+   * default type dataAdapter. Here is an example:
+   * <p>Let's say we want to write a type dataAdapter that counts the number of objects being read
+   *  from or written to JSON. We can achieve this by writing a type dataAdapter factory that uses
    *  the <code>getDelegateAdapter</code> method:
    *  <pre> {@code
    *  class StatsTypeAdapterFactory implements TypeAdapterFactory {
@@ -409,13 +409,13 @@ public final class Gson {
    *  System.out.println("Num JSON reads" + stats.numReads);
    *  System.out.println("Num JSON writes" + stats.numWrites);
    *  }</pre>
-   *  Note that since you can not override type adapter factories for String and Java primitive
+   *  Note that since you can not override type dataAdapter factories for String and Java primitive
    *  types, our stats factory will not count the number of String or primitives that will be
    *  read or written.
-   * @param skipPast The type adapter factory that needs to be skipped while searching for
-   *   a matching type adapter. In most cases, you should just pass <i>this</i> (the type adapter
+   * @param skipPast The type dataAdapter factory that needs to be skipped while searching for
+   *   a matching type dataAdapter. In most cases, you should just pass <i>this</i> (the type dataAdapter
    *   factory from where {@link #getDelegateAdapter} method is being invoked).
-   * @param type Type for which the delegate adapter is being searched for.
+   * @param type Type for which the delegate dataAdapter is being searched for.
    *
    * @since 2.2
    */
@@ -443,7 +443,7 @@ public final class Gson {
   }
 
   /**
-   * Returns the type adapter for {@code} type.
+   * Returns the type dataAdapter for {@code} type.
    *
    * @throws IllegalArgumentException if this GSON cannot serialize and
    *     deserialize {@code type}.

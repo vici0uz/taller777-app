@@ -26,7 +26,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * This type adapter supports three subclasses of date: Date, Timestamp, and
+ * This type dataAdapter supports three subclasses of date: Date, Timestamp, and
  * java.sql.Date.
  *
  * @author Inderjeet Singh
@@ -34,7 +34,7 @@ import java.util.TimeZone;
  */
 final class DefaultDateTypeAdapter implements JsonSerializer<Date>, JsonDeserializer<Date> {
 
-  // TODO: migrate to streaming adapter
+  // TODO: migrate to streaming dataAdapter
 
   private final DateFormat enUsFormat;
   private final DateFormat localFormat;

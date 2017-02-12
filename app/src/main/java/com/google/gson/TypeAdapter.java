@@ -34,7 +34,7 @@ import java.io.Writer;
  * By default Gson converts application classes to JSON using its built-in type
  * adapters. If Gson's default JSON conversion isn't appropriate for a type,
  * extend this class to customize the conversion. Here's an example of a type
- * adapter for an (X,Y) coordinate point: <pre>   {@code
+ * dataAdapter for an (X,Y) coordinate point: <pre>   {@code
  *
  *   public class PointAdapter extends TypeAdapter<Point> {
  *     public Point read(JsonReader reader) throws IOException {
@@ -57,9 +57,9 @@ import java.io.Writer;
  *       writer.value(xy);
  *     }
  *   }}</pre>
- * With this type adapter installed, Gson will convert {@code Points} to JSON as
+ * With this type dataAdapter installed, Gson will convert {@code Points} to JSON as
  * strings like {@code "5,8"} rather than objects like {@code {"x":5,"y":8}}. In
- * this case the type adapter binds a rich Java class to a compact JSON value.
+ * this case the type dataAdapter binds a rich Java class to a compact JSON value.
  *
  * <p>The {@link #read(JsonReader) read()} method must read exactly one value
  * and {@link #write(JsonWriter,Object) write()} must write exactly one value.
@@ -75,13 +75,13 @@ import java.io.Writer;
  *
  * <p>Type adapters should be prepared to read null from the stream and write it
  * to the stream. Alternatively, they should use {@link #nullSafe()} method while
- * registering the type adapter with Gson. If your {@code Gson} instance
+ * registering the type dataAdapter with Gson. If your {@code Gson} instance
  * has been configured to {@link GsonBuilder#serializeNulls()}, these nulls will be
  * written to the final document. Otherwise the value (and the corresponding name
  * when writing to a JSON object) will be omitted automatically. In either case
- * your type adapter must handle null.
+ * your type dataAdapter must handle null.
  *
- * <p>To use a custom type adapter with Gson, you must <i>register</i> it with a
+ * <p>To use a custom type dataAdapter with Gson, you must <i>register</i> it with a
  * {@link GsonBuilder}: <pre>   {@code
  *
  *   GsonBuilder builder = new GsonBuilder();
@@ -97,7 +97,7 @@ import java.io.Writer;
 // non-Javadoc:
 //
 // <h3>JSON Conversion</h3>
-// <p>A type adapter registered with Gson is automatically invoked while serializing
+// <p>A type dataAdapter registered with Gson is automatically invoked while serializing
 // or deserializing JSON. However, you can also use type adapters directly to serialize
 // and deserialize JSON. Here is an example for deserialization: <pre>   {@code
 //
@@ -143,8 +143,8 @@ public abstract class TypeAdapter<T> {
   }
 
   /**
-   * This wrapper method is used to make a type adapter null tolerant. In general, a
-   * type adapter is required to handle nulls in write and read methods. Here is how this
+   * This wrapper method is used to make a type dataAdapter null tolerant. In general, a
+   * type dataAdapter is required to handle nulls in write and read methods. Here is how this
    * is typically done:<br>
    * <pre>   {@code
    *
@@ -166,7 +166,7 @@ public abstract class TypeAdapter<T> {
    *     }
    *   }).create();
    * }</pre>
-   * You can avoid this boilerplate handling of nulls by wrapping your type adapter with
+   * You can avoid this boilerplate handling of nulls by wrapping your type dataAdapter with
    * this method. Here is how we will rewrite the above example:
    * <pre>   {@code
    *
@@ -180,7 +180,7 @@ public abstract class TypeAdapter<T> {
    *     }
    *   }.nullSafe()).create();
    * }</pre>
-   * Note that we didn't need to check for nulls in our type adapter after we used nullSafe.
+   * Note that we didn't need to check for nulls in our type dataAdapter after we used nullSafe.
    */
   public final TypeAdapter<T> nullSafe() {
     return new TypeAdapter<T>() {

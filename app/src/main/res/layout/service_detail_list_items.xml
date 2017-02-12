@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <!--View Layout-->
+    <LinearLayout
+        android:id="@+id/service_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <odoo.controls.OForm
+            android:id="@+id/serviceForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:modelName="workshop.service">
+
+            <odoo.controls.OField
+                app:fieldName="t_insurance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:showLabel="false"/>
+
+            <odoo.controls.OField
+                android:id="@+id/insurer_id_field"
+                app:fieldName="insurer_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconResource="@drawable/ic_work_black_24dp"/>
+
+            <odoo.controls.OField
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fieldName="vehicle_id"
+                app:iconResource="@drawable/ic_drive_eta_black_24dp"
+                app:showLabel="false"/>
+        </odoo.controls.OForm>
+    </LinearLayout>
+    <!--Edit Layout-->
+    <LinearLayout
+        android:id="@+id/service_edit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingTop="24dp"
+        android:visibility="gone">
+
+        <odoo.controls.OForm
+            android:id="@+id/serviceFormEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            app:modelName="workshop.service">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!--<odoo.controls.OField-->
+                    <!--android:id="@android:id/title"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:paddingLeft="@dimen/default_8dp"-->
+                    <!--app:fieldName="name"-->
+                    <!--app:fieldTextAppearance="?android:textAppearanceLarge"-->
+                    <!--app:showIcon="false"-->
+                    <!--app:showLabel="false"></odoo.controls.OField>-->
+
+
+                <View style="@style/ViewSeparator"/>
+
+
+
+            </LinearLayout>
+
+
+        </odoo.controls.OForm>
+    </LinearLayout>
+</LinearLayout>

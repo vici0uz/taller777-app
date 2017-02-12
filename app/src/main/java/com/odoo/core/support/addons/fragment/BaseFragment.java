@@ -107,7 +107,7 @@ public abstract class BaseFragment extends Fragment implements IBaseFragment {
     }
 
     private SyncStatusObserver mSyncStatusObserver = new SyncStatusObserver() {
-        /** Callback invoked with the sync adapter status changes. */
+        /** Callback invoked with the sync dataAdapter status changes. */
         @Override
         public void onStatusChanged(int which) {
             boolean refreshing = false;

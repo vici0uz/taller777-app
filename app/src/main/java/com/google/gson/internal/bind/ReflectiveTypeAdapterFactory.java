@@ -41,7 +41,7 @@ import java.util.Map;
 import static com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter;
 
 /**
- * Type adapter that reflects over the fields and methods of a class.
+ * Type dataAdapter that reflects over the fields and methods of a class.
  */
 public final class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
   private final ConstructorConstructor constructorConstructor;
@@ -90,7 +90,7 @@ public final class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
     // special casing primitives here saves ~5% on Android...
     return new BoundField(name, serialize, deserialize) {
       final TypeAdapter<?> typeAdapter = getFieldAdapter(context, field, fieldType);
-      @SuppressWarnings({"unchecked", "rawtypes"}) // the type adapter and field type always agree
+      @SuppressWarnings({"unchecked", "rawtypes"}) // the type dataAdapter and field type always agree
       @Override void write(JsonWriter writer, Object value)
           throws IOException, IllegalAccessException {
         Object fieldValue = field.get(value);

@@ -65,7 +65,7 @@ public final class TypeAdapters {
         out.nullValue();
       } else {
         throw new UnsupportedOperationException("Attempted to serialize java.lang.Class: "
-            + value.getName() + ". Forgot to register a type adapter?");
+            + value.getName() + ". Forgot to register a type dataAdapter?");
       }
     }
     @Override
@@ -75,7 +75,7 @@ public final class TypeAdapters {
         return null;
       } else {
         throw new UnsupportedOperationException(
-            "Attempted to deserialize a java.lang.Class. Forgot to register a type adapter?");
+            "Attempted to deserialize a java.lang.Class. Forgot to register a type dataAdapter?");
       }
     }
   };
@@ -778,7 +778,7 @@ public final class TypeAdapters {
         return typeToken.getRawType() == type ? (TypeAdapter<T>) typeAdapter : null;
       }
       @Override public String toString() {
-        return "Factory[type=" + type.getName() + ",adapter=" + typeAdapter + "]";
+        return "Factory[type=" + type.getName() + ",dataAdapter=" + typeAdapter + "]";
       }
     };
   }
@@ -793,7 +793,7 @@ public final class TypeAdapters {
       }
       @Override public String toString() {
         return "Factory[type=" + boxed.getName()
-            + "+" + unboxed.getName() + ",adapter=" + typeAdapter + "]";
+            + "+" + unboxed.getName() + ",dataAdapter=" + typeAdapter + "]";
       }
     };
   }
@@ -808,7 +808,7 @@ public final class TypeAdapters {
       }
       @Override public String toString() {
         return "Factory[type=" + base.getName()
-            + "+" + sub.getName() + ",adapter=" + typeAdapter + "]";
+            + "+" + sub.getName() + ",dataAdapter=" + typeAdapter + "]";
       }
     };
   }
@@ -821,7 +821,7 @@ public final class TypeAdapters {
         return clazz.isAssignableFrom(typeToken.getRawType()) ? (TypeAdapter<T>) typeAdapter : null;
       }
       @Override public String toString() {
-        return "Factory[typeHierarchy=" + clazz.getName() + ",adapter=" + typeAdapter + "]";
+        return "Factory[typeHierarchy=" + clazz.getName() + ",dataAdapter=" + typeAdapter + "]";
       }
     };
   }

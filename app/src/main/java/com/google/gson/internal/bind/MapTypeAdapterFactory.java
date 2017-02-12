@@ -66,14 +66,14 @@ import java.util.Map;
  *   ...</pre>
  *
  * <h3>Maps as JSON arrays</h3>
- * An alternative approach taken by this type adapter when it is required and
+ * An alternative approach taken by this type dataAdapter when it is required and
  * complex map key serialization is enabled is to encode maps as arrays of map
  * entries. Each map entry is a two element array containing a key and a value.
  * This approach is more flexible because any type can be used as the map's key;
  * not just strings. But it's also less portable because the receiver of such
  * JSON must be aware of the map entry convention.
  *
- * <p>Register this adapter when you are creating your GSON instance.
+ * <p>Register this dataAdapter when you are creating your GSON instance.
  * <pre>   {@code
  *   Gson gson = new GsonBuilder()
  *     .registerTypeAdapter(Map.class, new MapAsArrayTypeAdapter())
@@ -99,7 +99,7 @@ import java.util.Map;
  *     ]
  *   ]
  * }</pre>
- * This format will serialize and deserialize just fine as long as this adapter
+ * This format will serialize and deserialize just fine as long as this dataAdapter
  * is registered.
  */
 public final class MapTypeAdapterFactory implements TypeAdapterFactory {
@@ -134,7 +134,7 @@ public final class MapTypeAdapterFactory implements TypeAdapterFactory {
   }
 
   /**
-   * Returns a type adapter that writes the value as a string.
+   * Returns a type dataAdapter that writes the value as a string.
    */
   private TypeAdapter<?> getKeyAdapter(Gson context, Type keyType) {
     return (keyType == boolean.class || keyType == Boolean.class)

@@ -24,9 +24,9 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
 /**
- * Adapts a Gson 1.x tree-style adapter as a streaming TypeAdapter. Since the
- * tree adapter may be serialization-only or deserialization-only, this class
- * has a facility to lookup a delegate type adapter on demand.
+ * Adapts a Gson 1.x tree-style dataAdapter as a streaming TypeAdapter. Since the
+ * tree dataAdapter may be serialization-only or deserialization-only, this class
+ * has a facility to lookup a delegate type dataAdapter on demand.
  */
 final class TreeTypeAdapter<T> extends TypeAdapter<T> {
   private final JsonSerializer<T> serializer;
