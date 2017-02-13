@@ -37,7 +37,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        int width = context.getResources().getDisplayMetrics().widthPixels;
+
 
         Picasso.with(context).load(urlTallerMin + arregloImgs.get(position)).fit().placeholder(R.drawable.photo).into(viewHolder.img);
 

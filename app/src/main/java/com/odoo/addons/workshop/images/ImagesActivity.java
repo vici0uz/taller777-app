@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,17 +18,9 @@ import com.odoo.addons.workshop.models.WorkshopService;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OValues;
 
-import org.apache.commons.io.FilenameUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import nl.changer.polypicker.Config;
 import nl.changer.polypicker.ImagePickerActivity;
@@ -69,8 +60,7 @@ public class ImagesActivity extends AppCompatActivity  {
     private int rowId;
     private String field;
     private Pager mAdapter;
-    HashMap<Integer,RecyclerGridFragment> mPageReferenceMap;
-    private String images;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +69,6 @@ public class ImagesActivity extends AppCompatActivity  {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-        mPageReferenceMap = new HashMap<>();
 
         viewPager = (ViewPager) findViewById(R.id.pager);
 
@@ -91,14 +80,11 @@ public class ImagesActivity extends AppCompatActivity  {
         record = workshopService.browse(rowId);
         getSupportActionBar().setTitle(record.getString("name"));
 
-//        prepareData(imgs);
-
         setupViewPager(viewPager);
 
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
-
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -117,29 +103,6 @@ public class ImagesActivity extends AppCompatActivity  {
         mAdapter.addFrag(new RecyclerGridFragment(getResources().getColor(android.support.design.R.color.button_material_dark), imgs[2]), "Entrega");
         viewPager.setAdapter(mAdapter);
         viewPager.setCurrentItem(1);
-    }
-
-    private void prepareData(String[] imgs) {
-        images = imgs[1];
-        JSONParser parser = new JSONParser();
-        arregloImagenes = new ArrayList<String>();
-        try {
-            Object object = parser.parse(images);
-            JSONArray array = (JSONArray) object;
-            for (Object img : array) {
-                try {
-                    JSONObject object1 = new JSONObject(img.toString());
-                    String final_url = urlTaller + object1.get("name").toString();
-                    String fileName = FilenameUtils.getName(final_url);
-                    arregloImagenes.add(fileName);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     private void getImages() {

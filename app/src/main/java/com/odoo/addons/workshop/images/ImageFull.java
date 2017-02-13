@@ -32,7 +32,8 @@ public class ImageFull extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Image");
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setTitle("Image");
         imgV = (PhotoView) findViewById(R.id.img_photoview);
 
         extras = getIntent().getExtras();

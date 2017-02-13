@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Odoo</string>
+    <string name="app_version_name">Versión</string>
+    <string name="label_accounts">Cuentas</string>
+    <string name="label_cancel">Cancelar</string>
+    <string name="add_internal_note">Añadir una nota</string>
+    <string name="label_send_message"><u>Enviar un Mensaje</u></string>
+    <string name="label_version">Versión</string>
+    <string name="title_about">Acerca de</string>
+    <string name="notification_default_ring_tone"></string>
+    <string name="no_data_available">Aún no se cargaron imágenes :(.</string>
 </resources>
