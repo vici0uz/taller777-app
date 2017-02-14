@@ -33,7 +33,7 @@
     <string name="label_more">More</string>
     <string name="label_alert">Alert</string>
     <string name="label_warning">Warning</string>
-    <string name="label_error">Error</string>
+    <string name="label_error" translatable="false">Error</string>
     <string name="label_share">Share</string>
     <string name="label_import_contact">Import</string>
     <string name="label_address">Address</string>
@@ -52,13 +52,13 @@
     <string name="title_confirm">Confirm</string>
     <string name="title_working">Working&#8230;</string>
     <string name="title_please_wait">Please wait&#8230;</string>
-    <string name="label_ok">OK</string>
+    <string name="label_ok" translatable="false">OK</string>
     <string name="label_search">Search</string>
     <string name="label_delete">Delete</string>
     <string name="label_cancel">Cancel</string>
     <string name="label_logout">Logout</string>
     <string name="label_version">Version</string>
-    <string name="label_odoo_mobile_on_github">Odoo Mobile on GitHub</string>
+    <string name="label_odoo_mobile_on_github" translatable="false">Odoo Mobile on GitHub</string>
     <string name="label_odoo_developer_mode">Developer Mode</string>
     <string name="label_export_db">Export Database</string>
     <string name="label_our_apps">Our apps</string>
@@ -113,6 +113,6 @@
     <string name="about_Company_line3">Licenced under the terms of <a href="http://www.gnu.org/licenses/agpl.html/">GNU Affero General Public License</a></string>
     <string name="about_Company_line4">For more information visit <a href="https://www.odoo.com/">Odoo.com</a>.</string>
     <string name="app_version_name">Version</string>
-    <string name="notification_default_ring_tone">content://settings/system/notification_sound</string>
+    <string name="notification_default_ring_tone" translatable="false">content://settings/system/notification_sound</string>
     <string name="disclaimer_content">By continuing, you agree to the <a href="http://www.odoo.com/">Terms of Service</a> and <a href="http://www.odoo.com/">Privacy Policy</a></string>
 </resources>
