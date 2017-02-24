@@ -2,7 +2,11 @@ package com.odoo.addons.workshop.images;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +14,7 @@ import android.widget.ImageView;
 
 import com.odoo.R;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 
@@ -23,6 +28,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
 
     private Context context;
+    private DataAdapter.ViewHolder viewHolder;
 
     public DataAdapter(Context context, ArrayList<String> arregloImgs) {
         this.context = context;
@@ -32,14 +38,23 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     @Override
     public DataAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.image_item, viewGroup, false);
-        return new ViewHolder(view);
+         viewHolder = new DataAdapter.ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int w= displayMetrics.widthPixels;
+        int h = displayMetrics.heightPixels;
 
-        Picasso.with(context).load(urlTallerMin + arregloImgs.get(position)).fit().placeholder(R.drawable.photo).into(viewHolder.img);
+        System.out.println("ALAN DEBUG: w "+ w+ " h "+h);
+        int nw = w -20 / 2;
+        int nh = (((h-20)/4)*3) / 2;
+
+//        Picasso.with(context).load(urlTallerMin + arregloImgs.get(position)).resize(nw,nh).centerInside().placeholder(R.drawable.photo).into(viewHolder.img);
+        Picasso.with(context).load(urlTallerMin + arregloImgs.get(position)).resize(nw,nh).centerInside().placeholder(R.drawable.photo).into(viewHolder.img);
 
         viewHolder.img.setOnClickListener(new View.OnClickListener(){
 
@@ -69,6 +84,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             img = (ImageView)itemView.findViewById(R.id.img_view);
 
         }
+
+
     }
 
 

@@ -19,6 +19,8 @@ public class ImageTransformation {
 
                 double aspectRatio = (double) source.getHeight() / (double) source.getWidth();
                 int targetHeight = (int) (targetWidth * aspectRatio);
+                System.out.println("ALAN DEBUG: targetWidth "+ targetWidth);
+                System.out.println("ALAN DEBUG: targetHeight "+ targetHeight);
                 Bitmap result = Bitmap.createScaledBitmap(source, targetWidth, targetHeight, false);
                 if (result != source) {
                     // Same bitmap is returned if sizes are the same

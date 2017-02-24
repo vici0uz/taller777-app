@@ -7,8 +7,7 @@
     <ImageView
         android:id="@+id/img_view"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:adjustViewBounds="true"/>
+        android:layout_height="128dp"
+        android:padding="5dp"/>
 
 </FrameLayout>
