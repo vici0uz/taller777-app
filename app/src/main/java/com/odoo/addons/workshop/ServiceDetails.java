@@ -16,6 +16,7 @@ import com.odoo.base.addons.ir.feature.OFileManager;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OValues;
 import com.odoo.core.orm.fields.OColumn;
+import com.odoo.core.support.OUser;
 import com.odoo.core.support.OdooCompatActivity;
 import com.odoo.core.utils.OStringColorUtil;
 
@@ -39,6 +40,7 @@ public class ServiceDetails extends OdooCompatActivity {
     private Menu mMenu;
     private Toolbar toolbar;
     private String[] imgs = new String[3];
+    private OUser mUser;
     private int rowId;
 
     @Override
@@ -62,9 +64,10 @@ public class ServiceDetails extends OdooCompatActivity {
         extras = getIntent().getExtras();
         if (!hasRecordInExtra())
             mEditMode = true;
+        mUser = OUser.current(this);
+
         setupToolbar();
         prepareData();
-
     }
 
     private boolean hasRecordInExtra(){
@@ -135,6 +138,7 @@ public class ServiceDetails extends OdooCompatActivity {
                 Intent intent = new Intent(this, ImagesActivity.class);
                 intent.putExtra("images", imgs);
                 intent.putExtra("id",rowId);
+                intent.putExtra("username", mUser.getName());
                 startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

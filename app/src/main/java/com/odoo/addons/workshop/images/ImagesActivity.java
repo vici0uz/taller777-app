@@ -60,6 +60,7 @@ public class ImagesActivity extends AppCompatActivity  {
     private int rowId;
     private String field;
     private Pager mAdapter;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,7 @@ public class ImagesActivity extends AppCompatActivity  {
         imgs = extras.getStringArray("images");
         workshopService = new WorkshopService(this, null);
         rowId = extras.getInt("id");
+        userName = extras.getString("username");
         record = workshopService.browse(rowId);
         getSupportActionBar().setTitle(record.getString("name"));
 
@@ -140,6 +142,8 @@ public class ImagesActivity extends AppCompatActivity  {
                     if(imgs[tabLayout.getSelectedTabPosition()].length()>1){
                         builderNew.addFormDataPart("images", imgs[tabLayout.getSelectedTabPosition()]);
                     }
+                    // TODO: 25/02/17 Corregir Tema hora guardado Imagen Servidor 
+                    builderNew.addFormDataPart("user",userName);
                     for (Uri uri : uris) {
                         File f = new File(uri.getPath());
                         if (f.exists()) {
@@ -158,6 +162,7 @@ public class ImagesActivity extends AppCompatActivity  {
                                 e.printStackTrace();
                             }
 
+                        // TODO: 25/02/17 Mostrar cantidad imagenes subidas 
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             if (response.isSuccessful()){
@@ -189,6 +194,7 @@ public class ImagesActivity extends AppCompatActivity  {
                             }
                             if (!response.isSuccessful()) {
                                 // en caso de error
+                                Toast.makeText(ImagesActivity.this, "Algo ha salido horriblemente mal :(", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

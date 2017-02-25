@@ -84,8 +84,6 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
             img = (ImageView)itemView.findViewById(R.id.img_view);
         }
-
-
     }
 
 
