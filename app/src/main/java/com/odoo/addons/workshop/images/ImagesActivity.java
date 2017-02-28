@@ -62,6 +62,8 @@ public class ImagesActivity extends AppCompatActivity  {
     private Pager mAdapter;
     private String userName;
 
+    // TODO: 28/02/17 Borrar programaticamente la carpeta de picasso en la cache de la aplicacion  
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
