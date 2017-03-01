@@ -98,8 +98,8 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
         List<String> args = new ArrayList<>();
         String where = "";
         if(mCurfilter != null){
-            where += "name like ? ";
-            args.add("% " + mCurfilter + "%");
+            where += "name like ? COLLATE NOCASE";
+            args.add("%" + mCurfilter + "%");
         }
         String selection = (args.size() > 0) ? where : null;
         String[] selectionArgs = (args.size() > 0) ? args.toArray(new String[args.size()]): null;

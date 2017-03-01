@@ -31,7 +31,7 @@ public class WorkshopService extends OModel{
             .addSelection("cancelled", "Cancelled")
             .addSelection("pending", "Pending");
     OColumn have_images = new OColumn("Have pictures", OBoolean.class).setDefaultValue(false);
-    OColumn t_insurance = new OColumn("Insured?", OBoolean.class);
+    OColumn t_insurance = new OColumn("Insured", OBoolean.class);
     OColumn partner_id = new OColumn("Partner", ResPartner.class, OColumn.RelationType.ManyToOne);
     OColumn insurer_id = new OColumn("Insurer", ResPartner.class, OColumn.RelationType.ManyToOne)
             .addDomain("insurer", "=", true);

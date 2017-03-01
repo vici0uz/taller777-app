@@ -49,7 +49,6 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         int w= displayMetrics.widthPixels;
         int h = displayMetrics.heightPixels;
 
-        System.out.println("ALAN DEBUG: w "+ w+ " h "+h);
         int nw = w -20 / 2;
         int nh = (((h-20)/4)*3) / 2;
 

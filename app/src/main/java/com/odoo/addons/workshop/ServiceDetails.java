@@ -118,8 +118,7 @@ public class ServiceDetails extends OdooCompatActivity {
             mForm.setEditable(mEditMode);
             mForm.initForm(record);
             toolbar.setTitle(record.getString("name"));
-            if(!record.getBoolean("t_insurance"))
-                findViewById(R.id.insurer_id_field).setVisibility(View.GONE);
+            setView();
         }
     }
 
@@ -155,6 +154,11 @@ public class ServiceDetails extends OdooCompatActivity {
         imgs[1] = (!record.getString("multi_images_received").equals("false")) ? record.getString("multi_images_received") : "";
         imgs[2] = (!record.getString("multi_images_delivered").equals("false")) ? record.getString("multi_images_delivered") : "";
     }
+    private void setView(){
+        if (record.getBoolean("t_insurance")){
+            findViewById(R.id.t_insurance).setVisibility(View.GONE);
+            findViewById(R.id.insurer_id_field).setVisibility(View.VISIBLE);
 
-
+        }
+    }
 }
