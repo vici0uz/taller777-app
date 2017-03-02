@@ -6,6 +6,8 @@ import android.net.Uri;
 import com.odoo.BuildConfig;
 import com.odoo.base.addons.res.ResPartner;
 import com.odoo.core.orm.OModel;
+import com.odoo.core.orm.OValues;
+import com.odoo.core.orm.annotation.Odoo;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.OBoolean;
 import com.odoo.core.orm.fields.types.OSelection;
@@ -30,7 +32,6 @@ public class WorkshopService extends OModel{
             .addSelection("approved", "Approved")
             .addSelection("cancelled", "Cancelled")
             .addSelection("pending", "Pending");
-    OColumn have_images = new OColumn("Have pictures", OBoolean.class).setDefaultValue(false);
     OColumn t_insurance = new OColumn("Insured", OBoolean.class);
     OColumn partner_id = new OColumn("Partner", ResPartner.class, OColumn.RelationType.ManyToOne);
     OColumn insurer_id = new OColumn("Insurer", ResPartner.class, OColumn.RelationType.ManyToOne)
@@ -40,7 +41,10 @@ public class WorkshopService extends OModel{
     OColumn multi_images_received = new OColumn("Received Images", OText.class);
     OColumn multi_images_delivered = new OColumn("Delivered Images", OText.class);
     OColumn job_no = new OColumn("Job Number", OVarchar.class).setSize(10);
-    OColumn n_incident = new OColumn("Incident Numbrer", OVarchar.class).setSize(32);
+    OColumn n_incident = new OColumn("Incident Number", OVarchar.class).setSize(64);
+
+    @Odoo.Functional(method="storeHaveImages", depends={"multi_images", "multi_images_received", "multi_images_delivered"}, store = true)
+    OColumn have_images = new OColumn("Have pictures?", OVarchar.class);
 
     public WorkshopService(Context context,  OUser user) {
         super(context, "workshop.service", user);
@@ -52,6 +56,13 @@ public class WorkshopService extends OModel{
         return buildURI(AUTHORITY);
     }
 
+    public String storeHaveImages(OValues value){
+        if(!value.getString("multi_images").equals("false") || !value.getString("multi_images_received").equals("false") || !value.getString("multi_images_delivered").equals("false"))
+            return "true";
+        else
+            return "false";
+    }
+
     @Override
     public ODomain defaultDomain(){
         ODomain domain = new ODomain();
@@ -60,6 +71,8 @@ public class WorkshopService extends OModel{
         domain.add("state", "!=", "cancelled");
         return domain;
     }
+
+
 
     @Override
     public boolean allowCreateRecordOnServer(){

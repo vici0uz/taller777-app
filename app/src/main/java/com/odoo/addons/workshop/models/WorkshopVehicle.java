@@ -20,6 +20,8 @@ public class WorkshopVehicle extends OModel {
     OColumn license_plate = new OColumn("License Plate", OVarchar.class).setSize(10);
     OColumn vin_sn = new OColumn("Chassis Number", OVarchar.class).setSize(24);
     OColumn partner_id = new OColumn("Owner", ResPartner.class, OColumn.RelationType.ManyToOne);
+    OColumn service_ids = new OColumn("Services", WorkshopService.class,
+            OColumn.RelationType.OneToMany).setRelatedColumn("vehicle_id");
 
     public WorkshopVehicle(Context context, OUser user) {
         super(context, "workshop.vehicle", user);

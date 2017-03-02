@@ -14,7 +14,6 @@ import com.odoo.addons.workshop.images.ImagesActivity;
 import com.odoo.addons.workshop.models.WorkshopService;
 import com.odoo.base.addons.ir.feature.OFileManager;
 import com.odoo.core.orm.ODataRow;
-import com.odoo.core.orm.OValues;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.support.OUser;
 import com.odoo.core.support.OdooCompatActivity;
@@ -42,17 +41,17 @@ public class ServiceDetails extends OdooCompatActivity {
     private String[] imgs = new String[3];
     private OUser mUser;
     private int rowId;
+//    private CollapsingToolbarLayout collapsingToolbarLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.service_detail);
 
+//        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.service_collapsing_toolbar);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         fileManager = new OFileManager(this);
         if (toolbar != null)
             toolbar.setTitle("");
@@ -117,8 +116,23 @@ public class ServiceDetails extends OdooCompatActivity {
             setMode(mEditMode);
             mForm.setEditable(mEditMode);
             mForm.initForm(record);
-            toolbar.setTitle(record.getString("name"));
+//            View v = getLayoutInflater().inflate(R.layout.titleview,getContentResolver());
+            getSupportActionBar().setTitle(record.getString("name"));
             setView();
+
+//            TextView toolbarTitle = null;
+//            for (int i = 0; i<toolbar.getChildCount();++i){
+//                View child = toolbar.getChildAt(i);
+//                if(child instanceof TextView){
+//                    toolbarTitle = (TextView)child;
+////                    toolbarTitle.setLines(2);
+////                    toolbarTitle.setMinLines(2);
+//                    toolbarTitle.setText(record.getString("name"));
+//                    toolbarTitle.setSingleLine(false);
+////                    toolbarTitle.setTextColor(getResources().getColor(R.color.blue));
+//                }
+//            }
+
         }
     }
 
@@ -155,10 +169,10 @@ public class ServiceDetails extends OdooCompatActivity {
         imgs[2] = (!record.getString("multi_images_delivered").equals("false")) ? record.getString("multi_images_delivered") : "";
     }
     private void setView(){
-        if (record.getBoolean("t_insurance")){
+        if (!record.getBoolean("t_insurance")){
             findViewById(R.id.t_insurance).setVisibility(View.GONE);
-            findViewById(R.id.insurer_id_field).setVisibility(View.VISIBLE);
-
+            findViewById(R.id.insurer_id).setVisibility(View.GONE);
+            findViewById(R.id.n_incident).setVisibility(View.GONE);
         }
     }
 }

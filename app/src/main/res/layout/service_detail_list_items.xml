@@ -30,19 +30,28 @@
                 app:controlLabel="Asegurado"/>
 
             <odoo.controls.OField
-                android:id="@+id/insurer_id_field"
+                android:id="@+id/insurer_id"
                 app:fieldName="insurer_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:iconResource="@drawable/ic_work_black_24dp"
-                android:visibility="gone"/>
+                app:iconResource="@drawable/ic_work_black_24dp"/>
 
             <odoo.controls.OField
+                android:id="@+id/n_incident"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:fieldLabelColor="@color/theme_secondary"
+                app:fieldName="n_incident"
+                android:textAppearance="?android:textAppearanceMedium"/>
+
+            <odoo.controls.OField
+                android:id="@+id/vehicle_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fieldLabelColor="@color/theme_secondary"
                 app:fieldName="vehicle_id"
-                app:iconResource="@drawable/ic_drive_eta_black_24dp"
-                app:showLabel="false"/>
+                app:fieldTextAppearance="?android:textAppearanceMedium"
+                app:iconResource="@drawable/ic_drive_eta_black_24dp"/>
         </odoo.controls.OForm>
     </LinearLayout>
     <!--Edit Layout-->
