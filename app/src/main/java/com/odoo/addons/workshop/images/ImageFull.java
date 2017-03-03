@@ -8,12 +8,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ShareActionProvider;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.odoo.R;
 import com.squareup.picasso.Picasso;
@@ -22,6 +21,7 @@ import com.squareup.picasso.Target;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 
 import uk.co.senab.photoview.PhotoView;
 
@@ -45,6 +45,7 @@ public class ImageFull  extends AppCompatActivity {
         context = getApplicationContext();
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         imgV = (PhotoView) findViewById(R.id.img_photoview);
+        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         extras = getIntent().getExtras();
         final Target target = new Target() {
@@ -73,18 +74,14 @@ public class ImageFull  extends AppCompatActivity {
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
                 // TODO: 27/02/17 crear placeholder barra de carga
+                progressBar.setVisibility(View.VISIBLE);
             }
         };
         imgV.setTag(target);
         if(extras != null) {
             imgName = extras.getString("img");
             Picasso.with(context).load(urlTaller + imgName).into(target);
-
-
-
-
         }
-
     }
 
     @Override
@@ -95,12 +92,7 @@ public class ImageFull  extends AppCompatActivity {
         // Locate MenuItem with ShareActionProvider
         item = menu.findItem(R.id.menu_item_share);
 
-
-
-
-
         // Fetch and store ShareActionProvider
-        System.out.println("getActionProvider " + MenuItemCompat.getActionProvider(item));
         mShareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(item);
 //        mShareActionProvider.setOnShareTargetSelectedListener(this);
         if( mShareActionProvider != null){
@@ -133,5 +125,57 @@ public class ImageFull  extends AppCompatActivity {
 
 
     }
+
+//    private static class ImageViewTarget implements Target {
+//
+//        private WeakReference<PhotoView> mPhotoViewReference;
+//        private WeakReference<ProgressBar> mProgressBarReference;
+//
+//        public ImageViewTarget(PhotoView imageView, ProgressBar progressBar) {
+//            this.mPhotoViewReference = new WeakReference<>(imageView);
+//            this.mProgressBarReference = new WeakReference<>(progressBar);
+//        }
+//
+//        @Override
+//        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+//
+//            //you can use this bitmap to load image in image view or save it in image file like the one in the above question.
+//            PhotoView imageView = mPhotoViewReference.get();
+//            if (imageView != null) {
+//                imageView.setImageBitmap(bitmap);
+//            }
+//
+//            ProgressBar progressBar = mProgressBarReference.get();
+//            if (progressBar != null) {
+//                progressBar.setVisibility(View.GONE);
+//            }
+//        }
+//
+//        @Override
+//        public void onBitmapFailed(Drawable errorDrawable) {
+//            ImageView imageView = mPhotoViewReference.get();
+//            if (imageView != null) {
+//                imageView.setImageDrawable(errorDrawable);
+//            }
+//
+//            ProgressBar progressBar = mProgressBarReference.get();
+//            if (progressBar != null) {
+//                progressBar.setVisibility(View.GONE);
+//            }
+//        }
+//
+//        @Override
+//        public void onPrepareLoad(Drawable placeHolderDrawable) {
+//            ImageView imageView = mPhotoViewReference.get();
+//            if (imageView != null) {
+//                imageView.setImageDrawable(placeHolderDrawable);
+//            }
+//
+//            ProgressBar progressBar = mProgressBarReference.get();
+//            if (progressBar != null) {
+//                progressBar.setVisibility(View.VISIBLE);
+//            }
+//        }
+//    }
 
 }
