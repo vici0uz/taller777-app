@@ -65,3 +65,5 @@
 -dontwarn android.util.Xml
 -dontwarn org.junit.**
 -dontwarn com.fasterxml.**
+
+-keep class android.support.v7.widget.ShareActionProvider { *; }

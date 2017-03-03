@@ -132,7 +132,8 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
 
-        <activity android:name=".addons.workshop.images.ImageFull"/>
+        <activity android:name=".addons.workshop.images.ImageFull"
+            android:theme="@style/Theme.AppCompat.Light"/>
 
         <activity android:name="nl.changer.polypicker.ImagePickerActivity"/>
 
