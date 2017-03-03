@@ -44,40 +44,44 @@ public class ImageFull  extends AppCompatActivity {
         setContentView(R.layout.image_full);
         context = getApplicationContext();
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         imgV = (PhotoView) findViewById(R.id.img_photoview);
 
         extras = getIntent().getExtras();
+        final Target target = new Target() {
+            @Override
+            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
+
+                try {
+
+                    File cachePath = new File(context.getCacheDir(), "images");
+                    cachePath.mkdirs(); // don't forget to make the directory
+                    FileOutputStream stream = new FileOutputStream(cachePath + "/image.png"); // overwrites this image every time
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    stream.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                imgV.setImageBitmap(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+                // TODO: 27/02/17 crear error
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                // TODO: 27/02/17 crear placeholder barra de carga
+            }
+        };
+        imgV.setTag(target);
         if(extras != null) {
             imgName = extras.getString("img");
-            Picasso.with(context).load(urlTaller + imgName).into(new Target() {
-                @Override
-                public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
+            Picasso.with(context).load(urlTaller + imgName).into(target);
 
-                    try {
 
-                        File cachePath = new File(context.getCacheDir(), "images");
-                        cachePath.mkdirs(); // don't forget to make the directory
-                        FileOutputStream stream = new FileOutputStream(cachePath + "/image.png"); // overwrites this image every time
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                        stream.close();
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    imgV.setImageBitmap(bitmap);
-                }
-
-                @Override
-                public void onBitmapFailed(Drawable errorDrawable) {
-                    // TODO: 27/02/17 crear error
-                }
-
-                @Override
-                public void onPrepareLoad(Drawable placeHolderDrawable) {
-                    // TODO: 27/02/17 crear placeholder barra de carga
-                }
-            });
 
         }
 
