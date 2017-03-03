@@ -34,7 +34,6 @@ public class ImageFull  extends AppCompatActivity {
     private Bundle extras;
     private Context context;
     private String imgName;
-    private Toolbar toolbar;
     private final static String urlTaller = "http://www.taller777.com.py:8072/web/static/src/img/image_multi/";
     private android.support.v7.widget.ShareActionProvider mShareActionProvider;
     private MenuItem item;
@@ -44,11 +43,8 @@ public class ImageFull  extends AppCompatActivity {
         super.onCreate(savedInstanteState);
         setContentView(R.layout.image_full);
         context = getApplicationContext();
-
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        if (getSupportActionBar() != null)
-//            getSupportActionBar().setTitle("Image");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         imgV = (PhotoView) findViewById(R.id.img_photoview);
 
         extras = getIntent().getExtras();
