@@ -54,6 +54,7 @@ public class ImageFull  extends AppCompatActivity {
             @Override
             public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
 
+                // TODO: 04/03/17 Mejorar velocidad de carga
                 try {
 
                     File cachePath = new File(context.getCacheDir(), "images");
@@ -71,8 +72,6 @@ public class ImageFull  extends AppCompatActivity {
 
             @Override
             public void onBitmapFailed(Drawable errorDrawable) {
-                // TODO: 27/02/17 crear error
-                System.out.println("llamado onBitmapFailed");
                 progressBar.setVisibility(View.GONE);
                 imgError.setVisibility(View.VISIBLE);
 
@@ -80,7 +79,6 @@ public class ImageFull  extends AppCompatActivity {
 
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
-                // TODO: 27/02/17 crear placeholder barra de carga
                 progressBar.setVisibility(View.VISIBLE);
             }
         };
@@ -129,60 +127,5 @@ public class ImageFull  extends AppCompatActivity {
         share.putExtra(Intent.EXTRA_STREAM, contentUri);
         mShareActionProvider.setShareIntent(share);
         return  share;
-
-
     }
-
-//    private static class ImageViewTarget implements Target {
-//
-//        private WeakReference<PhotoView> mPhotoViewReference;
-//        private WeakReference<ProgressBar> mProgressBarReference;
-//
-//        public ImageViewTarget(PhotoView imageView, ProgressBar progressBar) {
-//            this.mPhotoViewReference = new WeakReference<>(imageView);
-//            this.mProgressBarReference = new WeakReference<>(progressBar);
-//        }
-//
-//        @Override
-//        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-//
-//            //you can use this bitmap to load image in image view or save it in image file like the one in the above question.
-//            PhotoView imageView = mPhotoViewReference.get();
-//            if (imageView != null) {
-//                imageView.setImageBitmap(bitmap);
-//            }
-//
-//            ProgressBar progressBar = mProgressBarReference.get();
-//            if (progressBar != null) {
-//                progressBar.setVisibility(View.GONE);
-//            }
-//        }
-//
-//        @Override
-//        public void onBitmapFailed(Drawable errorDrawable) {
-//            ImageView imageView = mPhotoViewReference.get();
-//            if (imageView != null) {
-//                imageView.setImageDrawable(errorDrawable);
-//            }
-//
-//            ProgressBar progressBar = mProgressBarReference.get();
-//            if (progressBar != null) {
-//                progressBar.setVisibility(View.GONE);
-//            }
-//        }
-//
-//        @Override
-//        public void onPrepareLoad(Drawable placeHolderDrawable) {
-//            ImageView imageView = mPhotoViewReference.get();
-//            if (imageView != null) {
-//                imageView.setImageDrawable(placeHolderDrawable);
-//            }
-//
-//            ProgressBar progressBar = mProgressBarReference.get();
-//            if (progressBar != null) {
-//                progressBar.setVisibility(View.VISIBLE);
-//            }
-//        }
-//    }
-
 }
