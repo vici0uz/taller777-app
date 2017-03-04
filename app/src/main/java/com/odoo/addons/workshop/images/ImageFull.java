@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.odoo.R;
@@ -45,6 +46,7 @@ public class ImageFull  extends AppCompatActivity {
         context = getApplicationContext();
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         imgV = (PhotoView) findViewById(R.id.img_photoview);
+        final ImageView imgError = (ImageView) findViewById(R.id.img_error);
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         extras = getIntent().getExtras();
@@ -64,11 +66,16 @@ public class ImageFull  extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 imgV.setImageBitmap(bitmap);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onBitmapFailed(Drawable errorDrawable) {
                 // TODO: 27/02/17 crear error
+                System.out.println("llamado onBitmapFailed");
+                progressBar.setVisibility(View.GONE);
+                imgError.setVisibility(View.VISIBLE);
+
             }
 
             @Override
