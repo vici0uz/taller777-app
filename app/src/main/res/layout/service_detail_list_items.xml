@@ -20,6 +20,14 @@
             android:orientation="vertical"
             app:modelName="workshop.service">
 
+            <odoo.controls.OField
+                android:id="@+id/partner_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fieldName="partner_id"
+                app:fieldTextAppearance="?android:textAppearanceMedium"
+                app:iconResource="@drawable/ic_person_black_24dp"
+                app:fieldLabelColor="@color/theme_secondary"/>
 
             <odoo.controls.OField
                 android:id="@+id/t_insurance"
@@ -31,18 +39,21 @@
 
             <odoo.controls.OField
                 android:id="@+id/insurer_id"
-                app:fieldName="insurer_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:iconResource="@drawable/ic_work_black_24dp"/>
+                app:fieldName="insurer_id"
+                app:iconResource="@drawable/ic_work_black_24dp"
+                app:fieldTextAppearance="?android:textAppearanceMedium"
+                app:fieldLabelColor="@color/theme_secondary"/>
 
             <odoo.controls.OField
                 android:id="@+id/n_incident"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldLabelColor="@color/theme_secondary"
                 app:fieldName="n_incident"
-                android:textAppearance="?android:textAppearanceMedium"/>
+                app:iconResource="@drawable/ic_info_outline_black_24dp"
+                app:fieldTextAppearance="?android:textAppearanceMedium"
+                app:fieldLabelColor="@color/theme_secondary"/>
 
             <odoo.controls.OField
                 android:id="@+id/vehicle_id"

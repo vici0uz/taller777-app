@@ -1,22 +1,28 @@
 package com.odoo.addons.workshop;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.odoo.App;
 import com.odoo.R;
+import com.odoo.addons.customers.CustomerDetails;
 import com.odoo.addons.workshop.images.ImagesActivity;
 import com.odoo.addons.workshop.models.WorkshopService;
 import com.odoo.base.addons.ir.feature.OFileManager;
+import com.odoo.base.addons.res.ResPartner;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.support.OUser;
 import com.odoo.core.support.OdooCompatActivity;
+import com.odoo.core.utils.IntentUtils;
+import com.odoo.core.utils.OCursorUtils;
 import com.odoo.core.utils.OStringColorUtil;
 
 import odoo.controls.OForm;
@@ -26,7 +32,7 @@ import odoo.controls.OForm;
  */
 
 
-public class ServiceDetails extends OdooCompatActivity {
+public class ServiceDetails extends OdooCompatActivity implements View.OnClickListener {
     public static final String TAG = ServiceDetails.class.getSimpleName();
     private final String KEY_MODE = "key_edit_mode";
     private Bundle extras;
@@ -41,6 +47,7 @@ public class ServiceDetails extends OdooCompatActivity {
     private String[] imgs = new String[3];
     private OUser mUser;
     private int rowId;
+    private CustomerDetails customerDetails;
 //    private CollapsingToolbarLayout collapsingToolbarLayout;
 
     @Override
@@ -113,26 +120,13 @@ public class ServiceDetails extends OdooCompatActivity {
         } else {
             rowId = extras.getInt(OColumn.ROW_ID);
             record = workshopService.browse(rowId);
+            System.out.println(rowId);
+            checkControls();
             setMode(mEditMode);
             mForm.setEditable(mEditMode);
             mForm.initForm(record);
-//            View v = getLayoutInflater().inflate(R.layout.titleview,getContentResolver());
             getSupportActionBar().setTitle(record.getString("name"));
             setView();
-
-//            TextView toolbarTitle = null;
-//            for (int i = 0; i<toolbar.getChildCount();++i){
-//                View child = toolbar.getChildAt(i);
-//                if(child instanceof TextView){
-//                    toolbarTitle = (TextView)child;
-////                    toolbarTitle.setLines(2);
-////                    toolbarTitle.setMinLines(2);
-//                    toolbarTitle.setText(record.getString("name"));
-//                    toolbarTitle.setSingleLine(false);
-////                    toolbarTitle.setTextColor(getResources().getColor(R.color.blue));
-//                }
-//            }
-
         }
     }
 
@@ -174,5 +168,29 @@ public class ServiceDetails extends OdooCompatActivity {
             findViewById(R.id.insurer_id).setVisibility(View.GONE);
             findViewById(R.id.n_incident).setVisibility(View.GONE);
         }
+    }
+
+    private void checkControls(){
+        findViewById(R.id.partner_id).setOnClickListener(this);
+        findViewById(R.id.insurer_id).setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View view) {
+        // TODO: 05/03/17 Crear VehicleDetails y apuntar a el vehiculo
+        switch (view.getId()){
+            case R.id.partner_id:
+                loadActivity("partner_id");
+                break;
+            case R.id.insurer_id:
+                loadActivity("insurer_id");
+                break;
+        }
+    }
+
+    private void loadActivity(String field){
+            Bundle bundle = new Bundle();
+            bundle.putInt("_id", record.getInt(field));
+            bundle.putString("partner_type", "Customer");
+            IntentUtils.startActivity(this, CustomerDetails.class, bundle);
     }
 }
