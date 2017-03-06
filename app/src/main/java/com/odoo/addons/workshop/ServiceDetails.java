@@ -48,14 +48,11 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
     private OUser mUser;
     private int rowId;
     private CustomerDetails customerDetails;
-//    private CollapsingToolbarLayout collapsingToolbarLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.service_detail);
-
-//        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.service_collapsing_toolbar);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -120,7 +117,6 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
         } else {
             rowId = extras.getInt(OColumn.ROW_ID);
             record = workshopService.browse(rowId);
-            System.out.println(rowId);
             checkControls();
             setMode(mEditMode);
             mForm.setEditable(mEditMode);

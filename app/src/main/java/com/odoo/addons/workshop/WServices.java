@@ -1,10 +1,14 @@
 package com.odoo.addons.workshop;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -69,6 +73,7 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
         setHasFloatingButton(view, R.id.fabButton, mWServicesList, this);
         hideFab();
         getLoaderManager().initLoader(0, null, this);
+
     }
 
     @Override
