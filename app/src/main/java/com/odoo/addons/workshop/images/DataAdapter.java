@@ -28,9 +28,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
 
     private Context context;
-    private DataAdapter.ViewHolder viewHolder;
 
-    public DataAdapter(Context context, ArrayList<String> arregloImgs) {
+    DataAdapter(Context context, ArrayList<String> arregloImgs) {
         this.context = context;
         this.arregloImgs = arregloImgs;
     }
@@ -38,8 +37,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     @Override
     public DataAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.image_item, viewGroup, false);
-         viewHolder = new DataAdapter.ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -75,12 +73,11 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-
             img = (ImageView)itemView.findViewById(R.id.img_view);
         }
     }

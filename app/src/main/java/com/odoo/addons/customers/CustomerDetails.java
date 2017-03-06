@@ -180,6 +180,8 @@ public class CustomerDetails extends OdooCompatActivity
                 IntentUtils.requestMessage(this, record.getString("email"));
                 break;
             case R.id.phone_number:
+
+                // TODO: 06/03/17 Separar en una funcion - Manejar "never ask again" 
                 if (ContextCompat.checkSelfPermission(CustomerDetails.this,
                         Manifest.permission.CALL_PHONE)
                         != PackageManager.PERMISSION_GRANTED) {
