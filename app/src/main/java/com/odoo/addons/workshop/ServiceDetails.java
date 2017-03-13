@@ -1,14 +1,12 @@
 package com.odoo.addons.workshop;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.odoo.App;
 import com.odoo.R;
@@ -16,13 +14,11 @@ import com.odoo.addons.customers.CustomerDetails;
 import com.odoo.addons.workshop.images.ImagesActivity;
 import com.odoo.addons.workshop.models.WorkshopService;
 import com.odoo.base.addons.ir.feature.OFileManager;
-import com.odoo.base.addons.res.ResPartner;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.support.OUser;
 import com.odoo.core.support.OdooCompatActivity;
 import com.odoo.core.utils.IntentUtils;
-import com.odoo.core.utils.OCursorUtils;
 import com.odoo.core.utils.OStringColorUtil;
 
 import odoo.controls.OForm;

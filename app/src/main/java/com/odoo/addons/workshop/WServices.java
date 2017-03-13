@@ -1,14 +1,10 @@
 package com.odoo.addons.workshop;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -19,7 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.odoo.R;
@@ -44,13 +43,15 @@ import java.util.List;
 public class WServices extends BaseFragment implements OCursorListAdapter.OnViewBindListener,
         LoaderManager.LoaderCallbacks<Cursor>, SwipeRefreshLayout.OnRefreshListener,
         View.OnClickListener, ISyncStatusObserverListener, IOnSearchViewChangeListener,
-        AdapterView.OnItemClickListener{
+        AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener{
 
     public static final String KEY = WServices.class.getSimpleName();
     private View mView;
     private String mCurfilter = null;
     private OCursorListAdapter mAdapter = null;
     private boolean syncRequested = false;
+    private String wState = null;
+    private Spinner spinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,8 +71,10 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
         mWServicesList.setAdapter(mAdapter);
         mWServicesList.setFastScrollAlwaysVisible(true);
         mWServicesList.setOnItemClickListener(this);
+        parent().setHasActionBarSpinner(true);
         setHasFloatingButton(view, R.id.fabButton, mWServicesList, this);
         hideFab();
+        initSpinner();
         getLoaderManager().initLoader(0, null, this);
 
     }
@@ -92,9 +95,8 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
 
     @Override
     public void onViewBind(View view, Cursor cursor, ODataRow row) {
-        if(!row.getBoolean("have_images")){
+        if(!row.getBoolean("have_images"))
             OControls.setGone(view, R.id.have_images_badge);
-        }
         OControls.setText(view, R.id.name, row.getString("name"));
     }
 
@@ -105,6 +107,13 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
         if(mCurfilter != null){
             where += "name like ? COLLATE NOCASE";
             args.add("%" + mCurfilter + "%");
+            if(wState != null){
+                where += " and state like ?";
+                args.add("%" + wState + "%");
+            }
+        }else if (wState != null){
+            where += "state like ?";
+            args.add("%" + wState + "%");
         }
         String selection = (args.size() > 0) ? where : null;
         String[] selectionArgs = (args.size() > 0) ? args.toArray(new String[args.size()]): null;
@@ -210,5 +219,73 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
             data = row.getPrimaryBundleData();
         }
         IntentUtils.startActivity(getActivity(), ServiceDetails.class, data);
+    }
+
+    private void initSpinner(){
+        // TODO: 13/03/17 Agregar filtro tiene imagenes 
+        if (getActivity() == null){
+            return;
+        }
+        List<String> list = new ArrayList<String>();
+        list.add("Estado");   //  Initial dummy entry
+        list.add("Borrador");
+        list.add("Aprobado");
+        list.add("Pendiente");
+
+        int hidingItemIndex = 0;
+
+        spinner = parent().getActionBarSpinner();
+        CustomAdapter dataAdapter = new CustomAdapter(getContext(), R.layout.spinner, list,  hidingItemIndex);
+        dataAdapter.setDropDownViewResource(R.layout.spinner);
+
+        spinner.setAdapter(dataAdapter);
+        spinner.setOnItemSelectedListener(this);
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+
+        switch (pos){
+            case 1:
+                wState = "draft";
+                break;
+            case 2:
+                wState = "approved";
+                break;
+            case 3:
+                wState = "pending";
+                break;
+
+        }
+        getLoaderManager().restartLoader(0,null,this);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    public class CustomAdapter extends ArrayAdapter<String> {
+
+        private int hidingItemIndex;
+
+        CustomAdapter(Context context, int textViewResourceId, List<String> objects, int hidingItemIndex) {
+            super(context, textViewResourceId, objects);
+            this.hidingItemIndex = hidingItemIndex;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            View v = null;
+            if (position == hidingItemIndex) {
+                TextView tv = new TextView(getContext());
+                tv.setVisibility(View.GONE);
+                v = tv;
+            } else {
+                v = super.getDropDownView(position, null, parent);
+            }
+            return v;
+        }
     }
 }

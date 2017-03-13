@@ -187,7 +187,6 @@ public class CustomerDetails extends OdooCompatActivity
                         != PackageManager.PERMISSION_GRANTED) {
 
                     // Should we show an explanation?
-                    System.out.println("LOL SE EJECUTA PAPACHO");
                     if (ActivityCompat.shouldShowRequestPermissionRationale(CustomerDetails.this,
                             Manifest.permission.CALL_PHONE)) {
 
