@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/android_grey">
+
+            <uk.co.senab.photoview.PhotoView
+                android:id="@+id/img_photoview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ProgressBar
+                style="@android:style/Widget.Holo.Light.ProgressBar"
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|center_horizontal"/>
+
+            <ImageView
+                android:id="@+id/img_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/komo"
+                android:visibility="gone"
+                tools:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+</RelativeLayout>

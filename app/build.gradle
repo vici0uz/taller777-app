@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25'
+    defaultConfig {
+        useLibrary 'org.apache.http.legacy'
+        manifestPlaceholders = [applicationName: "Taller 777"]
+        applicationId 'com.odoo'
+        minSdkVersion 14
+        targetSdkVersion 25
+        versionCode 7
+        versionName "2.3.0"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:cardview-v7:25.2.0'
+    compile 'com.google.android.gms:play-services-gcm:10.0.1'
+    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.volley:volley:1.0.0'
+    compile project(':intro-slider-lib')
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
+    compile 'org.apache.directory.studio:org.apache.commons.io:2.4'
+    compile 'com.github.chrisbanes:PhotoView:1.2.6'
+    compile 'com.github.jaydeepw:poly-picker:v1.0.22'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+}
+
+repositories {
+//    jcenter()
+    maven {
+        url "https://repo.commonsware.com.s3.amazonaws.com"
+    }
+    maven {
+        url "https://s3.amazonaws.com/repo.commonsware.com"
+    }
+    maven { url "https://jitpack.io" }
+}

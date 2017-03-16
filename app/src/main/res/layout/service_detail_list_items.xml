@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <!--View Layout-->
+    <LinearLayout
+        android:id="@+id/service_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <odoo.controls.OForm
+            android:id="@+id/serviceForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:modelName="workshop.service">
+
+            <odoo.controls.OField
+                android:id="@+id/partner_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fieldName="partner_id"
+                app:fieldTextAppearance="?android:textAppearanceMedium"
+                app:iconResource="@drawable/ic_person_black_24dp"
+                app:fieldLabelColor="@color/theme_secondary"/>
+
+            <odoo.controls.OField
+                android:id="@+id/t_insurance"
+                app:fieldName="t_insurance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:showLabel="false"
+                app:controlLabel="Asegurado"/>
+
+            <odoo.controls.OField
+                android:id="@+id/insurer_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fieldName="insurer_id"
+                app:fieldTextAppearance="?android:textAppearanceMedium"
+                app:iconResource="@drawable/ic_work_black_24dp"
+                app:fieldLabelColor="@color/theme_secondary"/>
+
+            <odoo.controls.OField
+                android:id="@+id/n_incident"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fieldName="n_incident"
+                app:iconResource="@drawable/ic_info_outline_black_24dp"
+                app:fieldTextAppearance="?android:textAppearanceMedium"
+                app:fieldLabelColor="@color/theme_secondary"/>
+
+            <odoo.controls.OField
+                android:id="@+id/vehicle_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fieldLabelColor="@color/theme_secondary"
+                app:fieldName="vehicle_id"
+                app:fieldTextAppearance="?android:textAppearanceMedium"
+                app:iconResource="@drawable/ic_drive_eta_black_24dp"/>
+        </odoo.controls.OForm>
+    </LinearLayout>
+    <!--Edit Layout-->
+    <LinearLayout
+        android:id="@+id/service_edit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingTop="24dp"
+        android:visibility="gone">
+
+        <odoo.controls.OForm
+            android:id="@+id/serviceFormEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            app:modelName="workshop.service">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!--<odoo.controls.OField-->
+                    <!--android:id="@android:id/title"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:paddingLeft="@dimen/default_8dp"-->
+                    <!--app:fieldName="name"-->
+                    <!--app:fieldTextAppearance="?android:textAppearanceLarge"-->
+                    <!--app:showIcon="false"-->
+                    <!--app:showLabel="false"></odoo.controls.OField>-->
+
+
+                <View style="@style/ViewSeparator"/>
+
+
+
+            </LinearLayout>
+
+
+        </odoo.controls.OForm>
+    </LinearLayout>
+</LinearLayout>
