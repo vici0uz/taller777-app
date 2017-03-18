@@ -22,12 +22,76 @@
                 android:layout_height="wrap_content"
                 app:fieldName="name"
                 app:fieldTextAppearance="?android:textAppearanceMedium"
-                app:showLabel="false"/>
+                app:showLabel="false"
+                app:fieldTextSize="@dimen/text_size_xmedium"/>
 
             <odoo.controls.OField
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldName="line_ids"/>
+                app:fieldName="date"
+                app:fieldTextAppearance="?android:textAppearanceMedium"
+                app:parsePattern="MMM dd, yyyy"
+                app:fieldTextSize="@dimen/text_size_xmedium"/>
+
+            <odoo.controls.OField
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fieldName="balance_start"
+                app:fieldTextAppearance="?android:textAppearanceSmall"
+                app:showLabel="true"
+                app:fieldTextSize="@dimen/text_size_xmedium"/>
+
+            <odoo.controls.OField
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fieldName="balance_end"
+                app:fieldTextAppearance="?android:textAppearanceSmall"
+                app:showLabel="true"
+                app:fieldTextSize="@dimen/text_size_xmedium"/>
+            <TextView
+                android:id="@+id/currency_symbol"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:gravity="center_vertical"
+                android:textColor="@color/body_text_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <odoo.controls.OField
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fieldName="balance_end_real"
+                app:fieldTextAppearance="?android:textAppearanceSmall"
+                app:showLabel="true"
+                app:fieldTextSize="@dimen/text_size_xmedium"/>
+            <View
+                style="@style/ViewSeparator"
+                android:layout_marginLeft="72dp" />
+        <!--TABLA-->
+            <ScrollView
+                android:id="@+id/scrollVertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/default_16dp">
+
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/scrollHorizontal"
+                    android:scrollbars="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TableLayout
+                            android:id="@+id/tabla"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+            </ScrollView>
 
         </odoo.controls.OForm>
     </LinearLayout>

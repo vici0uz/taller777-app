@@ -39,4 +39,12 @@
         <item>Pendiente</item>
     </string-array>
 
+    <string-array name="cabecera_tabla">
+        <!--<item>N°</item>-->
+        <item>Concepto</item>
+        <item>Monto</item>
+        <item>Fecha</item>
+        <!--<item>Valor 3</item>-->
+        <!--<item>Valor 4</item>-->
+    </string-array>
 </resources>
