@@ -28,6 +28,7 @@ public class Tabla
     private Resources rs;
     private int FILAS, COLUMNAS;        // Filas y columnas de nuestra tabla
 
+
     /**
      * Constructor de la tabla
      * @param actividad Actividad donde va a estar la tabla
@@ -65,7 +66,6 @@ public class Tabla
             texto.setTextAppearance(actividad, R.style.estilo_celda);
             texto.setBackgroundResource(R.drawable.tabla_celda_cabecera);
             texto.setLayoutParams(layoutCelda);
-
             fila.addView(texto);
         }
 
@@ -86,14 +86,20 @@ public class Tabla
         TableRow fila = new TableRow(actividad);
         fila.setLayoutParams(layoutFila);
 
+
         for(int i = 0; i< elementos.size(); i++)
         {
             TextView texto = new TextView(actividad);
             texto.setText(String.valueOf(elementos.get(i)));
             texto.setGravity(Gravity.CENTER_HORIZONTAL);
             texto.setTextAppearance(actividad, R.style.estilo_celda);
-            texto.setBackgroundResource(R.drawable.tabla_celda);
+//            if (i%2 == 0)
+                texto.setBackgroundResource(R.drawable.tabla_celda);
+//            else
+//                texto.setBackgroundResource(R.drawable.tabla_celda_impar);
+
             layoutCelda = new TableRow.LayoutParams(obtenerAnchoPixelesTexto(texto.getText().toString()), TableRow.LayoutParams.WRAP_CONTENT);
+            fila.setBackgroundColor(actividad.getResources().getColor(R.color.android_grey));
             texto.setLayoutParams(layoutCelda);
 
             fila.addView(texto);
