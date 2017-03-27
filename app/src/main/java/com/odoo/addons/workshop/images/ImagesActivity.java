@@ -248,6 +248,7 @@ public class ImagesActivity extends AppCompatActivity  {
                                 values = new OValues();
                                 values.put(field, msg);
                                 workshopService.update(rowId, values);
+                                workshopService.sync().requestSync(WorkshopService.AUTHORITY);
                                 ImagesActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {

@@ -61,7 +61,7 @@ public class CajaDetails extends OdooCompatActivity {
         setSupportActionBar(toolbar);
 
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         extras = getIntent().getExtras();
 

@@ -5,8 +5,12 @@ import android.net.Uri;
 
 import com.odoo.BuildConfig;
 import com.odoo.base.addons.res.ResPartner;
+import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OModel;
+import com.odoo.core.orm.OValues;
+import com.odoo.core.orm.annotation.Odoo;
 import com.odoo.core.orm.fields.OColumn;
+import com.odoo.core.orm.fields.types.OBoolean;
 import com.odoo.core.orm.fields.types.ODate;
 import com.odoo.core.orm.fields.types.OFloat;
 import com.odoo.core.orm.fields.types.OSelection;
@@ -34,6 +38,11 @@ public class AccountBankStatement extends OModel{
         OColumn balance_end = new OColumn("Saldo Teorico", OFloat.class);
         OColumn balance_end_real = new OColumn("Saldo Real", OFloat.class);
         OColumn difference = new OColumn("Diferencia", OFloat.class);
+        OColumn journal_id = new OColumn("Journal", AccountJournal.class, OColumn.RelationType.ManyToOne);
+
+//        @Odoo.Functional(store = true, depends="journal_id", method="getJournalType")
+        OColumn journal_type = new OColumn("Journal Type", OVarchar.class);
+
 
 
     public AccountBankStatement(Context context, OUser user) {
@@ -43,4 +52,5 @@ public class AccountBankStatement extends OModel{
     public Uri uri(){
         return buildURI(AUTHORITY);
     }
+
 }

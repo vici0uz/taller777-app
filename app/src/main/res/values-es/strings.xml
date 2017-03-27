@@ -8,7 +8,7 @@
     <string name="label_send_message"><u>Enviar un Mensaje</u></string>
     <string name="label_version">Versión</string>
     <string name="title_about">Acerca de</string>
-    <string name="notification_default_ring_tone"></string>
+    <string name="notification_default_ring_tone">Tono por defecto</string>
     <string name="no_data_available">Aún no se cargaron imágenes :(.</string>
     <string name="confirm_are_you_sure_want_to_delete">Esta seguro de querer borrar?</string>
     <string name="error_invalid_password">Contraseña invalida</string>
@@ -39,7 +39,6 @@
     <string name="toast_something_gone_wrong">Algo salio mal</string>
     <string name="label_create_account">Crear cuenta</string>
     <string name="label_drawer_account_manage_accounts">Administrar Cuentas</string>
-    <string name="label_error" translatable="false">Error</string>
     <string name="label_export_db">Exportar Base de Datos</string>
     <string name="label_forgot_password">Olvido su contraseña?</string>
     <string name="label_log_an_internal_note"><u>Registrar una nota interna</u></string>
