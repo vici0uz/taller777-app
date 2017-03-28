@@ -72,8 +72,7 @@ public class ImagesActivity extends AppCompatActivity  {
     int MY_PERMISSIONS_REQUEST_CAMERA = 10;
     int MY_PERMISSIONS_REQUEST_WRITE = 20;
 
-    // TODO: 28/02/17 Borrar programaticamente la carpeta de picasso en la cache de la aplicacion  
-
+    // TODO: 28/03/17 Mantener una cache minima de 5mb de picasso 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
