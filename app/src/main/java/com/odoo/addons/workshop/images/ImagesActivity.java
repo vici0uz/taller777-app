@@ -2,6 +2,7 @@ package com.odoo.addons.workshop.images;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -22,6 +23,8 @@ import com.odoo.addons.workshop.models.WorkshopService;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OValues;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.odoo.core.utils.sys.OCacheUtils.deleteDir;
 
 
 /**
@@ -268,6 +272,22 @@ public class ImagesActivity extends AppCompatActivity  {
                 }
             }
         }
+    }
+
+    public static void deleteCache(Context context) {
+        try {
+            File cachePicasso = new File(context.getCacheDir(),"picasso-cache");
+            if (cachePicasso != null && cachePicasso.isDirectory()) {
+                FileUtils.deleteDirectory(cachePicasso);
+            }
+        } catch (Exception e) {}
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        deleteCache(getApplicationContext());
     }
 }
 
