@@ -31,12 +31,16 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.javiersantos.appupdater.enums.Display;
+import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import com.odoo.R;
 import com.odoo.base.addons.ir.IrModel;
 import com.odoo.core.utils.IntentUtils;
 import com.odoo.core.utils.OAppBarUtils;
 import com.odoo.core.utils.OPreferenceManager;
 import com.odoo.datas.OConstants;
+
+import com.github.javiersantos.appupdater.AppUpdater;
 
 public class About extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = About.class.getSimpleName();
@@ -114,6 +118,17 @@ public class About extends AppCompatActivity implements View.OnClickListener {
             case R.id.menu_export_db:
                 IrModel model = new IrModel(this, null);
                 model.exportDB();
+                return true;
+            case R.id.updateButton:
+                new AppUpdater(this)
+                        .setUpdateFrom(UpdateFrom.JSON)
+                        .setUpdateJSON("http://www.taller777.com.py/app/update.json")
+                        .setDisplay(Display.DIALOG)
+                        .showAppUpdated(true)
+                        .setTitleOnUpdateAvailable(R.string.update_title)
+                        .setContentOnUpdateAvailable(R.string.update_content)
+                        .setIcon(R.drawable.ic_stat_name)
+                        .start();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

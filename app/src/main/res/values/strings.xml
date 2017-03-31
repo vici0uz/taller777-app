@@ -19,4 +19,6 @@
     <string name="toast_record_deleted">Record deleted</string>
     <string name="no_data_available">No data available.</string>
     <string name="label_no_cash_record_found">No records found</string>
+    <string name="update_title">Update Available</string>
+    <string name="update_content">Check out the latest version available of my app!</string>
 </resources>

@@ -1,9 +1,11 @@
 package com.odoo.addons.workshop;
 
+import android.Manifest;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -288,4 +290,5 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
             return v;
         }
     }
+
 }
