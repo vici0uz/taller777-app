@@ -52,7 +52,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
         // TODO: Mejorar Dimensiones Grid Piccaso
 //        Picasso.with(context).load(urlTallerMin + arregloImgs.get(position)).resize(nw,nh).centerInside().placeholder(R.drawable.photo).into(viewHolder.img);
-        Picasso.with(context).load(urlTallerMin + arregloImgs.get(position)).resize(nw,nh).centerInside().placeholder(R.drawable.photo).into(viewHolder.img);
+        Picasso.with(context).load(urlTallerMin + arregloImgs.get(position)).placeholder(R.drawable.photo).into(viewHolder.img);
 
         viewHolder.img.setOnClickListener(new View.OnClickListener(){
 

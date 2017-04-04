@@ -4,10 +4,12 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
-    <ImageView
+    <com.odoo.addons.workshop.images.SquareImageView
         android:id="@+id/img_view"
-        android:layout_width="fill_parent"
-        android:layout_height="128dp"
-        android:padding="5dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"/>
 
 </FrameLayout>
