@@ -168,6 +168,8 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/caja_sync_adapter"/>
         </service>
+
+        <activity android:name=".addons.caja_chica.CajaDetails"/>
     </application>
 
 </manifest>
