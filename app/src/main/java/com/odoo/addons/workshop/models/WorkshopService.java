@@ -45,6 +45,7 @@ public class WorkshopService extends OModel{
 
     @Odoo.Functional(method="storeHaveImages", depends={"multi_images", "multi_images_received", "multi_images_delivered"}, store = true)
     OColumn have_images = new OColumn("Have pictures?", OVarchar.class);
+    OColumn autopart_ids = new OColumn("Autopart Receiving Order", WorkshopAutopartReceiving.class, OColumn.RelationType.OneToMany).setRelatedColumn("service_id");
 
     public WorkshopService(Context context,  OUser user) {
         super(context, "workshop.service", user);
