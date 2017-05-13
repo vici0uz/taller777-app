@@ -1,10 +1,12 @@
 package com.odoo.addons.caja_chica;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -27,19 +29,22 @@ public class Tabla
     private Activity actividad;
     private Resources rs;
     private int FILAS, COLUMNAS;        // Filas y columnas de nuestra tabla
+    private Context context;
 
     /**
      * Constructor de la tabla
      * @param actividad Actividad donde va a estar la tabla
      * @param tabla TableLayout donde se pintará la tabla
      */
-    public Tabla(Activity actividad, TableLayout tabla)
+    public Tabla(Activity actividad, TableLayout tabla, Context context)
     {
         this.actividad = actividad;
         this.tabla = tabla;
         rs = this.actividad.getResources();
         FILAS = COLUMNAS = 0;
         filas = new ArrayList<TableRow>();
+        this.context = context;
+
     }
 
     /**
@@ -102,6 +107,13 @@ public class Tabla
 
         tabla.addView(fila);
         filas.add(fila);
+        fila.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("evento");
+                v.setBackgroundColor(context.getResources().getColor(R.color.android_red));
+            }
+        });
         tabla.setStretchAllColumns(true);
 
         FILAS++;

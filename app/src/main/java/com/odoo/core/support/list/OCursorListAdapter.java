@@ -30,6 +30,7 @@ import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.SectionIndexer;
 
+import com.odoo.addons.workshop.ReceivingOrders;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.utils.logger.OLog;
 

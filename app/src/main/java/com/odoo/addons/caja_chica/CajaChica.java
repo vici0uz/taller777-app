@@ -209,7 +209,6 @@ public class CajaChica extends BaseFragment implements
     private void loadActivity(ODataRow row){
         Bundle data = new Bundle();
         AccountJournal journal = new AccountJournal(getContext(), null);
-        System.out.println(journal.browse(row.getInt("journal_id")).getString("type"));
         if (row != null){
             data = row.getPrimaryBundleData();
         }

@@ -170,6 +170,26 @@
         </service>
 
         <activity android:name=".addons.caja_chica.CajaDetails"/>
+
+        <!--Autoparte-->
+        <provider
+            android:authorities="com.odoo.addons.workshop.content.sync.autopart"
+            android:name="com.odoo.addons.workshop.providers.AutopartSyncProvider"
+            android:label="Receiving Orders"
+            android:multiprocess="true"/>
+
+        <service android:name="com.odoo.addons.workshop.services.AutopartSyncService"
+            android:exported="true"
+            android:process=":sync_autopart">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/autopart_sync_adapter"/>
+        </service>
+
+        <activity android:name=".addons.workshop.ReceivingOrdersDetails"/>
     </application>
 
 </manifest>

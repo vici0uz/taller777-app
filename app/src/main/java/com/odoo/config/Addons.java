@@ -21,6 +21,7 @@ package com.odoo.config;
 
 import com.odoo.addons.caja_chica.CajaChica;
 import com.odoo.addons.customers.Customers;
+import com.odoo.addons.workshop.ReceivingOrders;
 import com.odoo.addons.workshop.WServices;
 import com.odoo.core.support.addons.AddonsHelper;
 import com.odoo.core.support.addons.OAddon;
@@ -38,5 +39,6 @@ public class Addons extends AddonsHelper {
     OAddon customers = new OAddon(Customers.class);
     OAddon wservices = new OAddon(WServices.class).setDefault();
     OAddon caja_chica = new OAddon(CajaChica.class);
+    OAddon receiving_orders = new OAddon(ReceivingOrders.class);
 }
 

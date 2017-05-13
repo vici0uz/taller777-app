@@ -102,9 +102,8 @@ public class CajaDetails extends OdooCompatActivity {
                 date.add(matcherDate.group(1));
 
         }
-        for(String p: concepto)
-            System.out.println(p);
-        Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla));
+
+        Tabla tabla = new Tabla(this, (TableLayout)findViewById(R.id.tabla), getApplicationContext());
         tabla.agregarCabecera(R.array.cabecera_tabla);
         for(int x=0; x<concepto.size(); x++){
             ArrayList<String> elementos = new ArrayList<String>();

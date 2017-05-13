@@ -47,4 +47,9 @@
         <!--<item>Valor 3</item>-->
         <!--<item>Valor 4</item>-->
     </string-array>
+
+    <string-array name="cabecera_partes">
+        <item>Autoparte</item>
+        <item>Cant.</item>
+    </string-array>
 </resources>

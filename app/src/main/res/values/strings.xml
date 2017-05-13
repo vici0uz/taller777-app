@@ -21,4 +21,5 @@
     <string name="label_no_cash_record_found">No records found</string>
     <string name="update_title">Update Available</string>
     <string name="update_content">Check out the latest version available of my app!</string>
+    <string name="label_no_orders_found">No orders found</string>
 </resources>
