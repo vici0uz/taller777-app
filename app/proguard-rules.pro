@@ -65,5 +65,13 @@
 -dontwarn android.util.Xml
 -dontwarn org.junit.**
 -dontwarn com.fasterxml.**
+-dontwarn java8.util.**
 
 -keep class android.support.v7.widget.ShareActionProvider { *; }
+
+#-keepattributes *Annotation*
+#-keepclassmembers class ** {@org.greenrobot.eventbus.Suscribe <methods>;}
+#-keep enum org.greenrobot.eventbus.ThreadMode{*;}
+-keepclassmembers class ** {
+    public void onEvent*(**);
+    }

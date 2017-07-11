@@ -1,7 +1,9 @@
 package com.odoo.addons.workshop.models;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
 
 import com.odoo.BuildConfig;
 import com.odoo.base.addons.res.ResPartner;
@@ -83,5 +85,13 @@ public class WorkshopService extends OModel{
     @Override
     public boolean allowDeleteRecordOnServer(){
         return false;
+    }
+
+    @Override
+    public void onModelUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+        Log.d("ALAN", "PUTAAAA");
+        System.out.println("ALAN Debug: db "+ db);
+        System.out.println("ALAN DEBUG: oldVersion: " + oldVersion);
+        System.out.println("ALAN DEBUG: newVersion: "+ newVersion);
     }
 }

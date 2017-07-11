@@ -70,4 +70,6 @@
     <color name="negro">#000000</color>
     <color name="marfil">#FFFFF0</color>
     <color name="dorado">#EEE8AA</color>
+    <color name="gris_claro">#bdbdbd</color>
+    <color name="fondo_tabla_presed">#535151</color>
 </resources>

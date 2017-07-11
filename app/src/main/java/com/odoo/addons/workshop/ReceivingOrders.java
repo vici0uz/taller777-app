@@ -13,11 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.odoo.R;
 import com.odoo.addons.workshop.models.WorkshopAutopartReceiving;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.support.addons.fragment.BaseFragment;
+import com.odoo.core.support.addons.fragment.ISyncStatusObserverListener;
 import com.odoo.core.support.drawer.ODrawerItem;
 import com.odoo.core.support.list.OCursorListAdapter;
 import com.odoo.core.utils.IntentUtils;
@@ -32,17 +34,18 @@ import java.util.List;
  */
 
 public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.OnViewBindListener, View.OnClickListener, LoaderManager.LoaderCallbacks<Cursor>, SwipeRefreshLayout.OnRefreshListener,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener, ISyncStatusObserverListener {
 
     public static final String TAG = ReceivingOrders.class.getSimpleName();
     private View mView;
     private ListView mReceivingOrdersList;
     private OCursorListAdapter mAdapter = null;
     private String mCurfilter;
-    private boolean syncRequested;
+    private boolean syncRequested = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        setHasSyncStatusObserver(TAG, this,db());
         return inflater.inflate(R.layout.common_listview, container, false);
     }
 
@@ -95,7 +98,7 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
         }
         String selection = (args.size()>0)? where : null;
         String[] selectionArgs = (args.size()>0) ? args.toArray(new String[args.size()]): null;
-        return new CursorLoader(getActivity(), db().uri(), null, selection, selectionArgs, "name");
+        return new CursorLoader(getActivity(), db().uri(), null, selection, selectionArgs, "create_date desc");
     }
 
     @Override
@@ -139,6 +142,13 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
 
     @Override
     public void onRefresh() {
+        if(inNetwork()){
+            parent().sync().requestSync(WorkshopAutopartReceiving.AUTHORITY);
+            setSwipeRefreshing(true);
+        } else {
+            hideRefreshingProgress();
+            Toast.makeText(getActivity(), _s(R.string.toast_network_required), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void loadActivity(ODataRow row){
@@ -154,5 +164,10 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
        ODataRow row = OCursorUtils.toDatarow((Cursor) mAdapter.getItem(position));
        loadActivity(row);
+    }
+
+    @Override
+    public void onStatusChange(Boolean refreshing) {
+        getLoaderManager().restartLoader(0,null,this);
     }
 }

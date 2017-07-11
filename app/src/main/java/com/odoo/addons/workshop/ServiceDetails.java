@@ -43,7 +43,6 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
     private String[] imgs = new String[3];
     private OUser mUser;
     private int rowId;
-    private CustomerDetails customerDetails;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

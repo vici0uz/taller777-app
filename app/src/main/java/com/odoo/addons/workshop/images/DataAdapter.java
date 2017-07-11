@@ -25,6 +25,7 @@ import java.util.ArrayList;
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     private ArrayList<String> arregloImgs;
     private final String urlTallerMin = "http://www.taller777.com.py:8072/web/static/src/img/image_multi/thumbs/";
+//    private final String urlTallerMin = "http://192.168.1.5:8072/web/static/src/img/image_multi/thumbs/";
 
 
     private Context context;
@@ -44,7 +45,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
         Picasso.with(context).load(urlTallerMin + arregloImgs.get(position)).placeholder(R.drawable.photo).into(viewHolder.img);
-
+        System.out.println(urlTallerMin+arregloImgs.get(position));
         viewHolder.img.setOnClickListener(new View.OnClickListener(){
 
             @Override

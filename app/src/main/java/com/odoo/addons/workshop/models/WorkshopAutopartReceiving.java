@@ -14,7 +14,7 @@ import com.odoo.core.support.OUser;
  */
 
 public class WorkshopAutopartReceiving extends OModel {
-    public static final String AUTHORITY = BuildConfig.APPLICATION_ID + ".addons.workshop.content.sync.autopart";
+    public static final String AUTHORITY = BuildConfig.APPLICATION_ID + ".addons.workshop.content.sync.autopart_receiving";
 
     OColumn name = new OColumn("Name", OVarchar.class).setSize(100).setRequired();
     OColumn autopart_receiving_lot_ids = new OColumn("Lot", WorkshopAutopartReceivingLot.class, OColumn.RelationType.OneToMany).setRelatedColumn("workshop_autopart_receiving_id");

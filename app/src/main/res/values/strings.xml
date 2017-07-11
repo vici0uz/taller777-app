@@ -22,4 +22,18 @@
     <string name="update_title">Update Available</string>
     <string name="update_content">Check out the latest version available of my app!</string>
     <string name="label_no_orders_found">No orders found</string>
+    <string name="scan_barcode_button">Scan barcode</string>
+    <string name="no_barcode_captured">No barcode captured</string>
+    <string name="barcode_error_format">"Error reading barcode: %1$s"</string>
+
+    <!-- Strings related to barcode scanner -->
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
+    <string name="scan_code_label">Scan code</string>
+    <string name="label_number_picker"/>
+    <string name="receive_dialog_title">Receive Autopart</string>
+    <string name="toast_scan_code_first">Please scan a valid code first!</string>
+    <string name="save_record">Save Record</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.odoo.addons.caja_chica;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Paint;
@@ -12,6 +13,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.odoo.R;
+import com.odoo.addons.workshop.utils.ReceiveOrderDialogFragment;
 
 import java.util.ArrayList;
 
@@ -91,7 +93,6 @@ public class Tabla
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         TableRow fila = new TableRow(actividad);
         fila.setLayoutParams(layoutFila);
-
         for(int i = 0; i< elementos.size(); i++)
         {
             TextView texto = new TextView(actividad);
@@ -107,13 +108,59 @@ public class Tabla
 
         tabla.addView(fila);
         filas.add(fila);
-        fila.setOnClickListener(new View.OnClickListener() {
+
+        tabla.setStretchAllColumns(true);
+
+        FILAS++;
+    }
+
+    public void agregarFilaTabla(final ArrayList<String> elementos, final int position)
+    {
+        TableRow.LayoutParams layoutCelda;
+        TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        TableRow fila = new TableRow(actividad);
+
+
+        if (position % 2 == 0){
+            fila.setBackgroundResource(R.drawable.tabla_celda_impar);
+
+        } else {
+            fila.setBackgroundResource(R.drawable.tabla_celda_par);
+        }
+        fila.setFocusable(true);
+        fila.setFocusableInTouchMode(true);
+        fila.setOnLongClickListener(new View.OnLongClickListener(){
+
             @Override
-            public void onClick(View v) {
-                System.out.println("evento");
-                v.setBackgroundColor(context.getResources().getColor(R.color.android_red));
+            public boolean onLongClick(View v) {
+//                ReceiveOrderDialogFragment dialogFragment = new ReceiveOrderDialogFragment();
+                FragmentTransaction ft = actividad.getFragmentManager().beginTransaction();
+                android.app.Fragment prev = actividad.getFragmentManager().findFragmentByTag("dialog");
+                if(prev != null){
+                    ft.remove(prev);
+                }
+                ReceiveOrderDialogFragment newFragment = ReceiveOrderDialogFragment.newInstance(1,elementos, actividad);
+                newFragment.show(actividad.getFragmentManager(), "dialog");
+
+                return false;
             }
         });
+        fila.setLayoutParams(layoutFila);
+        for(int i = 0; i< 2; i++)
+        {
+            TextView texto = new TextView(actividad);
+            texto.setText(String.valueOf(elementos.get(i)));
+            texto.setGravity(Gravity.CENTER_HORIZONTAL);
+            texto.setTextAppearance(actividad, R.style.estilo_celda);
+            layoutCelda = new TableRow.LayoutParams(obtenerAnchoPixelesTexto(texto.getText().toString()), TableRow.LayoutParams.WRAP_CONTENT);
+            texto.setLayoutParams(layoutCelda);
+
+            fila.addView(texto);
+        }
+
+        tabla.addView(fila);
+        filas.add(fila);
+
         tabla.setStretchAllColumns(true);
 
         FILAS++;

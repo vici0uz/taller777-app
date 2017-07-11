@@ -57,6 +57,7 @@ public class ImagesActivity extends AppCompatActivity  {
     private static final int INTENT_REQUEST_GET_IMAGES = 13;
     private static final String TAG = ImagesActivity.class.getSimpleName();
     private String url = "http://www.taller777.com.py:7979/uploader";
+//    private String url = "http://192.168.1.5:7979/uploader";
     private MediaType type = MediaType.parse("image/jpeg");
     private static final String ALAN = "ALAN DEBUG : ";
 
@@ -217,7 +218,7 @@ public class ImagesActivity extends AppCompatActivity  {
                     for (Uri uri : uris) {
                         File f = new File(uri.getPath());
                         if (f.exists()) {
-                            builderNew.addFormDataPart("file", uri.getLastPathSegment(), RequestBody.create(type, f));
+                            builderNew.addFormDataPart("ufile", uri.getLastPathSegment(), RequestBody.create(type, f));
                         }
                     }
                     MultipartBody multipartBody = builderNew.build();
@@ -259,13 +260,14 @@ public class ImagesActivity extends AppCompatActivity  {
                                         Toast.makeText(ImagesActivity.this, "Las imagenes se guardaron correctamente.", Toast.LENGTH_SHORT).show();
                                         RecyclerGridFragment frag = (RecyclerGridFragment) mAdapter.getItem(tabPos);
                                         frag.updateFrag(msg);
-
                                     }
                                 });
                             }
                             if (!response.isSuccessful()) {
                                 // en caso de error
-                                Toast.makeText(ImagesActivity.this, "Algo ha salido horriblemente mal :(", Toast.LENGTH_SHORT).show();
+                                // TODO: 27/05/17 Mejorar manejo de errores el toast no se muestra
+                                System.out.println(response.body().string());
+//                                Toast.makeText(ImagesActivity.this, "Algo ha salido horriblemente mal :(", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

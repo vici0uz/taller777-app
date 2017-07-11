@@ -97,5 +97,16 @@
                 <View style="@style/ViewSeparator"/>
             </LinearLayout>
         </odoo.controls.OForm>
+        <TextView
+            android:id="@+id/result_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_barcode_captured"
+            android:textSize="22sp"
+            android:freezesText="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
     </LinearLayout>
 </LinearLayout>

@@ -10,6 +10,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -77,6 +78,7 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
         setHasFloatingButton(view, R.id.fabButton, mWServicesList, this);
         hideFab();
         initSpinner();
+        Log.i("ALAND", "HOLAA");
         getLoaderManager().initLoader(0, null, this);
 
     }

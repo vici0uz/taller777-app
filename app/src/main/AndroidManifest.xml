@@ -173,7 +173,7 @@
 
         <!--Autoparte-->
         <provider
-            android:authorities="com.odoo.addons.workshop.content.sync.autopart"
+            android:authorities="com.odoo.addons.workshop.content.sync.autopart_receiving"
             android:name="com.odoo.addons.workshop.providers.AutopartSyncProvider"
             android:label="Receiving Orders"
             android:multiprocess="true"/>
@@ -189,7 +189,27 @@
                 android:resource="@xml/autopart_sync_adapter"/>
         </service>
 
+        <!--Lote-->
+        <provider
+            android:name="com.odoo.addons.workshop.providers.ReceivingLotSyncProvider"
+            android:authorities="com.odoo.addons.workshop.content.sync.receiving_lot"
+            android:label="Receiving Lots"
+            android:multiprocess="true"/>
+        <service android:name=".addons.workshop.services.ReceivingLotSyncService"
+            android:exported="true"
+            android:process=":sync_lots">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/receivinglot_sync_adapter"/>
+        </service>
+
         <activity android:name=".addons.workshop.ReceivingOrdersDetails"/>
+        <activity android:name=".addons.workshop.BarcodeCaptureActivity"/>
+        <activity android:name=".addons.workshop.SimpleScannerFragmentActivity"/>
+
     </application>
 
 </manifest>

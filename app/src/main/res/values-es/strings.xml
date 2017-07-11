@@ -60,4 +60,7 @@
     <string name="label_accept_login">Aceptar &amp; Login</string>
     <string name="update_title">Actualización Disponible!</string>
     <string name="update_content">Descargue e instale la última versión disponible de esta aplicación.</string>
+    <string name="receive_dialog_title">Recibir Autopartes</string>
+    <string name="scan_code_label">Escanear Código</string>
+    <string name="toast_scan_code_first">Por favor escanee un código válido primero!</string>
 </resources>

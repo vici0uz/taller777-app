@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".addons.workshop.ReceivingOrdersDetails">
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="@dimen/default_16dp">
+
+
+        <NumberPicker
+            android:id="@+id/np"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:descendantFocusability="blocksDescendants" />
+        <TextView
+            android:id="@+id/autopart_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:layout_toRightOf="@+id/np"/>
+
+        <TextView
+            android:layout_below="@+id/np"
+            android:text="Ubicación"
+            android:id="@+id/label_ub_autopart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/ub_autopart"/>
+        <TextView
+            android:id="@+id/ub_autopart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/label_ub_autopart"
+            android:text="Prueba"
+            android:textSize="14dp" />
+
+    </RelativeLayout>
+</LinearLayout>
