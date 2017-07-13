@@ -206,6 +206,23 @@
                 android:resource="@xml/receivinglot_sync_adapter"/>
         </service>
 
+        <!--Location-->
+        <provider
+            android:authorities="com.odoo.addons.workshop.content.sync.w_stock_location"
+            android:name="com.odoo.addons.workshop.providers.WorkshopAutopartStockLocationProvider"
+            android:label="Stock Locations"
+            android:multiprocess="true"/>
+        <service android:name=".addons.workshop.services.WorkshopAutopartStockLocationService"
+            android:exported="true"
+            android:process=":sync_locations">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/stock_location_adapter"/>
+        </service>
+
         <activity android:name=".addons.workshop.ReceivingOrdersDetails"/>
         <activity android:name=".addons.workshop.BarcodeCaptureActivity"/>
         <activity android:name=".addons.workshop.SimpleScannerFragmentActivity"/>

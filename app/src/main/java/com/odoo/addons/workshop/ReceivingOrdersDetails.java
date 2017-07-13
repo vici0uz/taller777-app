@@ -196,14 +196,14 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
         ODataRow registro = receivingLot.browse(lotId);
         registro.getAll();
         OValues values = new OValues();
-//        values.addAll(registro.getAll());
-        System.out.println("values antes del put"+ values.toString());
-        values.put("stock_location_id", locationId);
-        values.put("qty", 88);
-        System.out.println("values despues del put " + values.toString());
+//        System.out.println("record id escaneado " + locationId);
+//        System.out.println("retornado " + stockLocation.selectServerId(locationId));
+//        ODataRow stockObj = stockLocation.browse(stockLocation.selectServerId(locationId));
+//        System.out.println("Nombre record "+ stockObj.getString("name"));
+//        ODataRow stockObj = stockLocation.selectServerId(locationId);
+        values.put("stock_location_id", stockLocation.selectServerId(locationId));
         receivingLot.update(lotId, values);
         receivingLot.sync().requestSync(WorkshopAutopartReceivingLot.AUTHORITY);
-        System.out.println("esta sucio " +receivingLot.isServerRecordDirty(2020));
 
     }
 

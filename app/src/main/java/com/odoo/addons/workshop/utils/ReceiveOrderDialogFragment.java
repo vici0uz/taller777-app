@@ -56,7 +56,7 @@ public class ReceiveOrderDialogFragment extends DialogFragment {
         view = (View)inflater.inflate(R.layout.fragment_dialog_r_order,null);
         TextView autopart_name = (TextView)view.findViewById(R.id.autopart_name);
         tvUbicacion = (TextView) view.findViewById(R.id.ub_autopart);
-        tvUbicacion.setText(getArguments().getString("stock_location"));
+        tvUbicacion.setText(getArguments().getString("stock_location_adapter"));
 
 
         autopart_name.setText(getArguments().getString("autopart_name"));
@@ -152,7 +152,7 @@ public class ReceiveOrderDialogFragment extends DialogFragment {
         System.out.println("LOT ID " + id);
         args.putInt("num", num);
         args.putString("autopart_name", autopartName);
-        args.putString("stock_location", stockLocation);
+        args.putString("stock_location_adapter", stockLocation);
         args.putInt("autopartQty", autopartQty);
         args.putInt("lot_id",id);
 
