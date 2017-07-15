@@ -22,6 +22,7 @@ import com.odoo.core.orm.OValues;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.support.OdooCompatActivity;
 import com.odoo.core.utils.OStringColorUtil;
+import com.odoo.core.utils.StringUtils;
 
 import de.greenrobot.event.EventBus;
 
@@ -196,12 +197,12 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
         ODataRow registro = receivingLot.browse(lotId);
         registro.getAll();
         OValues values = new OValues();
-//        System.out.println("record id escaneado " + locationId);
-//        System.out.println("retornado " + stockLocation.selectServerId(locationId));
-//        ODataRow stockObj = stockLocation.browse(stockLocation.selectServerId(locationId));
-//        System.out.println("Nombre record "+ stockObj.getString("name"));
-//        ODataRow stockObj = stockLocation.selectServerId(locationId);
-        values.put("stock_location_id", stockLocation.selectServerId(locationId));
+        String sqlStr = "SELECT _id FROM workshop_autopart_stock_location WHERE id = ?";
+        String[] arr = new String[1];
+        arr[0]= String.valueOf(locationId);
+        List<ODataRow> q = stockLocation.query(sqlStr, arr);
+        int locID =q.get(0).getInt("_id");
+        values.put("stock_location_id", locID);
         receivingLot.update(lotId, values);
         receivingLot.sync().requestSync(WorkshopAutopartReceivingLot.AUTHORITY);
 
