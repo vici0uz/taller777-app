@@ -61,6 +61,13 @@
     <string name="update_title">Actualización Disponible!</string>
     <string name="update_content">Descargue e instale la última versión disponible de esta aplicación.</string>
     <string name="receive_dialog_title">Recibir Autopartes</string>
-    <string name="scan_code_label">Escanear Código</string>
+    <string name="scan_code_label">Escanear</string>
     <string name="toast_scan_code_first">Por favor escanee un código válido primero!</string>
+    <string name="toast_record_deleted">Registro borrado</string>
+    <string name="toast_setting_saved">Configuracion guardadas.</string>
+    <string name="ok">Ok</string>
+    <string name="label_error" translatable="false">Error</string>
+    <string name="save_record">Guardar</string>
+    <string name="label_location">Ubicación</string>
+    <string name="label_ok" translatable="false">Ok</string>
 </resources>

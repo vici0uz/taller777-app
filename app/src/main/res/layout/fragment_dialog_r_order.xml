@@ -30,7 +30,7 @@
 
         <TextView
             android:layout_below="@+id/np"
-            android:text="Ubicación"
+            android:text="@string/label_location"
             android:id="@+id/label_ub_autopart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,8 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/label_ub_autopart"
-            android:text="Prueba"
-            android:textSize="14dp" />
+            android:textSize="18dp"
+            android:textStyle="bold"/>
 
     </RelativeLayout>
 </LinearLayout>

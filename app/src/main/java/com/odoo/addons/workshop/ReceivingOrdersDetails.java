@@ -160,9 +160,7 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
             Pattern patternLotId = Pattern.compile("\\s_id=(.*?),");
             Matcher matcherLotId = patternLotId.matcher(l);
             if (matcherLotId.find()) {
-                System.out.println(l);
                 String id = matcherLotId.group(1);
-                System.out.println("el valor de id"+ id);
                 lot_id.add(id);
             }
         }
@@ -190,7 +188,7 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
 //        }
     }
 
-
+    // TODO: 16/07/17 Cambiar de EventBus a una interface
     public void onEvent(MessageEvent event){
         int lotId = event.lotId;
         int locationId = event.locationId;
