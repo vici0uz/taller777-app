@@ -37,8 +37,8 @@ public class Addons extends AddonsHelper {
      * OAddon partners = new OAddon(Partners.class).withSequence(2);
      */
     OAddon customers = new OAddon(Customers.class);
-    OAddon wservices = new OAddon(WServices.class);
+    OAddon wservices = new OAddon(WServices.class).setDefault();
 //    OAddon caja_chica = new OAddon(CajaChica.class);
-    OAddon receiving_orders = new OAddon(ReceivingOrders.class).setDefault();
+    OAddon receiving_orders = new OAddon(ReceivingOrders.class);
 }
 
