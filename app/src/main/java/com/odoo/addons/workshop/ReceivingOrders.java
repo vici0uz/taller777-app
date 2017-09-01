@@ -66,7 +66,7 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
     @Override
     public List<ODrawerItem> drawerMenus(Context context) {
         List<ODrawerItem> items = new ArrayList<>();
-        items.add(new ODrawerItem(TAG).setTitle("Receiving Orders")
+        items.add(new ODrawerItem(TAG).setTitle("Repuestos")
         .setIcon(R.drawable.ic_move_to_inbox_black_24dp)
         .setInstance(new ReceivingOrders()));
         return items;

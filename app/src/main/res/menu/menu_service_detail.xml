@@ -22,7 +22,7 @@
         <menu>
             <item
                 android:id="@+id/service_images"
-                android:title="Vehicle Images"/>
+                android:title="@string/menu_vehicle_images_label"/>
         </menu>
     </item>
 </menu>

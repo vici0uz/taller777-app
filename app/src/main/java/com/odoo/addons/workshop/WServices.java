@@ -78,9 +78,7 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
         setHasFloatingButton(view, R.id.fabButton, mWServicesList, this);
         hideFab();
         initSpinner();
-        Log.i("ALAND", "HOLAA");
         getLoaderManager().initLoader(0, null, this);
-
     }
 
     @Override

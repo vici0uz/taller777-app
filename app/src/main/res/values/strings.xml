@@ -37,4 +37,12 @@
     <string name="toast_scan_code_first">Please scan a valid code first!</string>
     <string name="save_record">Save Record</string>
     <string name="label_location">Location</string>
+    <string name="label_orders">Receiving Orders</string>
+    <string name="menu_label_print">Print</string>
+    <string name="label_field_insurer">Insurer</string>
+    <string name="label_field_partner">Partner</string>
+    <string name="label_field_vehicle">Vehicle</string>
+    <string name="label_field_name">Name</string>
+    <string name="toast_printing">Print order sent</string>
+    <string name="menu_vehicle_images_label">Vehicle Images</string>
 </resources>

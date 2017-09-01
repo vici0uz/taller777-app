@@ -24,19 +24,25 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldName="name"/>
+                app:fieldName="name"
+                app:controlLabel="@string/label_field_name"
+                android:visibility="gone"/>
 
             <odoo.controls.OField
                 android:id="@+id/service_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldName="service_id"/>
+                app:fieldName="service_id"
+                android:visibility="gone"/>
 
             <odoo.controls.OField
                 android:id="@+id/vehicle_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldName="vehicle_id"/>
+                app:fieldName="vehicle_id"
+                app:iconResource="@drawable/ic_drive_eta_black_24dp"
+                app:controlLabel="@string/label_field_vehicle"
+                app:fieldTextAppearance="?android:textAppearanceMedium"/>
 
             <View
                 style="@style/ViewSeparator"

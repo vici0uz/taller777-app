@@ -2,11 +2,15 @@ package com.odoo.addons.workshop;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.odoo.App;
 import com.odoo.R;
@@ -20,20 +24,19 @@ import com.odoo.base.addons.ir.feature.OFileManager;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OValues;
 import com.odoo.core.orm.fields.OColumn;
+import com.odoo.core.rpc.helper.OArguments;
 import com.odoo.core.support.OdooCompatActivity;
 import com.odoo.core.utils.OStringColorUtil;
-import com.odoo.core.utils.StringUtils;
 
-import de.greenrobot.event.EventBus;
+import org.json.JSONArray;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import de.greenrobot.event.EventBus;
 import odoo.controls.OForm;
-
 /**
  * Created by alan on 04/05/17.
  */
@@ -54,6 +57,7 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
     private TextView mResultTextView;
     private WorkshopAutopartStockLocation stockLocation;
     private WorkshopAutopartReceivingLot receivingLot;
+    private Menu mMenu;
 
 
     @Override
@@ -218,5 +222,39 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
     public void onDestroy(){
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_receive_order_detail, menu);
+        mMenu = menu;
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.menu_accion:
+                Toast.makeText(mContext, R.string.toast_printing, Toast.LENGTH_SHORT).show();
+                RecOrderOperations recOrderOperations = new RecOrderOperations();
+                recOrderOperations.execute(record);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    private class RecOrderOperations extends AsyncTask<ODataRow, Void, Void>{
+
+
+        @Override
+        protected Void doInBackground(ODataRow... params) {
+            OArguments args = new OArguments();
+            JSONArray dat = new JSONArray();
+            dat.put(record.getInt("id"));
+            args.add(dat);
+            workshopAutopartReceiving.getServerDataHelper().callMethod("print_direct_report",args);
+            return null;
+        }
     }
 }

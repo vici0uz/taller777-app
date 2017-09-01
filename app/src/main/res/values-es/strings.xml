@@ -22,12 +22,12 @@
     <string name="label_more">Más</string>
     <string name="label_log_note">Registrar nota</string>
     <string name="label_share">Compartir</string>
-    <string name="label_version_build"></string>
+    <string name="label_version_build">Compilación</string>
     <string name="status_connected_to_server">Conectado</string>
     <string name="sync_label_customers">Clientes</string>
     <string name="title_profile">Perfil</string>
     <string name="title_confirm">Confirmar</string>
-    <string name="title_please_wait"></string>
+    <string name="title_please_wait">Por favor aguarde&#8230;</string>
     <string name="toast_network_required">Conexion a la red requerida</string>
     <string name="toast_information_saved">Información Guardada</string>
     <string name="label_send">Enviar</string>
@@ -66,8 +66,20 @@
     <string name="toast_record_deleted">Registro borrado</string>
     <string name="toast_setting_saved">Configuracion guardadas.</string>
     <string name="ok">Ok</string>
-    <string name="label_error" translatable="false">Error</string>
     <string name="save_record">Guardar</string>
     <string name="label_location">Ubicación</string>
-    <string name="label_ok" translatable="false">Ok</string>
+    <string name="menu_label_print">Imprimir</string>
+    <string name="label_field_insurer">Aseguradora</string>
+    <string name="label_field_partner">Cliente</string>
+    <string name="label_field_vehicle">Vehículo</string>
+    <string name="label_field_name">Nombre</string>
+    <string name="toast_printing">Enviando orden de impresión...</string>
+    <string name="menu_vehicle_images_label">Imágenes del Vehículo</string>
+    <string name="toast_account_removed">La cuenta fue eliminada</string>
+    <string name="title_application_settings">Configuración de la aplicación</string>
+    <string name="status_logging_in">Iniciando sesión</string>
+    <string name="label_orders">Ordenes de Recepción</string>
+    <string name="internal_note_hint"></string>
+    <string name="no_camera_permission">Esta aplicacion no podra funcionar porque no tiene permiso para usar la camara. La aplicación terminara ahora.</string>
+    <string name="status_connecting_to_server">Conectando&#8230;</string>
 </resources>

@@ -7,7 +7,10 @@ import com.odoo.BuildConfig;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.OVarchar;
+import com.odoo.core.rpc.helper.OArguments;
 import com.odoo.core.support.OUser;
+
+import org.json.JSONArray;
 
 /**
  * Created by alan on 28/04/17.
@@ -29,4 +32,5 @@ public class WorkshopAutopartReceiving extends OModel {
     public Uri uri(){
         return buildURI(AUTHORITY);
     }
+
 }
