@@ -6,6 +6,7 @@ import android.net.Uri;
 import com.odoo.BuildConfig;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.fields.OColumn;
+import com.odoo.core.orm.fields.types.OBoolean;
 import com.odoo.core.orm.fields.types.OFloat;
 import com.odoo.core.orm.fields.types.OInteger;
 import com.odoo.core.support.OUser;
@@ -21,6 +22,7 @@ public class WorkshopAutopartReceivingLot extends OModel {
     OColumn workshop_autopart_receiving_id = new OColumn("Autopart Receiving Order", WorkshopAutopartReceiving.class, OColumn.RelationType.ManyToOne);
     OColumn qty = new OColumn("Quantity", OInteger.class);
     OColumn stock_location_id = new OColumn("Location", WorkshopAutopartStockLocation.class, OColumn.RelationType.ManyToOne);
+    OColumn stored = new OColumn("Stored", OBoolean.class).setDefaultValue(false);
 
     public WorkshopAutopartReceivingLot(Context context, OUser user) {
         super(context, "workshop.autopart.receiving.lot", user);

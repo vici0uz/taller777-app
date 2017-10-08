@@ -49,6 +49,7 @@
     </string-array>
 
     <string-array name="cabecera_partes">
+        <item>Rec.</item>
         <item>Autoparte</item>
         <item>Cant.</item>
     </string-array>

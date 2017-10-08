@@ -82,4 +82,8 @@
     <string name="internal_note_hint"></string>
     <string name="no_camera_permission">Esta aplicacion no podra funcionar porque no tiene permiso para usar la camara. La aplicación terminara ahora.</string>
     <string name="status_connecting_to_server">Conectando&#8230;</string>
+    <string name="label_no_data">Sin datos</string>
+    <string name="label_processed">Hecho</string>
+    <string name="toast_not_processed">Primero debe almacenar los autorepuestos!</string>
+    <string name="menu_to_receive">Ordenes de Repuestos</string>
 </resources>

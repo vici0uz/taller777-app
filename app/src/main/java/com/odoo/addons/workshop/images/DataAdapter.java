@@ -2,11 +2,7 @@ package com.odoo.addons.workshop.images;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +10,6 @@ import android.widget.ImageView;
 
 import com.odoo.R;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 
@@ -45,7 +40,6 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
         Picasso.with(context).load(urlTallerMin + arregloImgs.get(position)).placeholder(R.drawable.photo).into(viewHolder.img);
-        System.out.println(urlTallerMin+arregloImgs.get(position));
         viewHolder.img.setOnClickListener(new View.OnClickListener(){
 
             @Override

@@ -80,6 +80,9 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
     @Override
     public void onViewBind(View view, Cursor cursor, ODataRow row) {
         OControls.setText(view, R.id.name, row.getString("name"));
+        if(row.getBoolean("processed")){
+            OControls.setVisible(view, R.id.completado);
+        }
     }
 
     @Override
@@ -94,7 +97,6 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
         if (mCurfilter != null){
             where += "name like ? COLLATE NOCASE";
             args.add("%" + mCurfilter + "%");
-
         }
         String selection = (args.size()>0)? where : null;
         String[] selectionArgs = (args.size()>0) ? args.toArray(new String[args.size()]): null;
@@ -132,7 +134,6 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
                 onRefresh();
             }
         }
-
     }
 
     @Override

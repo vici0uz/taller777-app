@@ -45,4 +45,8 @@
     <string name="label_field_name">Name</string>
     <string name="toast_printing">Print order sent</string>
     <string name="menu_vehicle_images_label">Vehicle Images</string>
+    <string name="label_no_data">No data</string>
+    <string name="label_processed">Done</string>
+    <string name="toast_not_processed">Autoparts not located</string>
+    <string name="menu_to_receive">Receive Orders</string>
 </resources>

@@ -1,10 +1,11 @@
-package com.odoo.addons.workshop;
+package com.odoo.addons.workshop.autopart_receiving;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.odoo.R;
+import com.odoo.addons.workshop.autopart_receiving.SimpleScannerFragment;
 
 public class SimpleScannerFragmentActivity extends AppCompatActivity implements SimpleScannerFragment.OnCodeScanned {
     private static final int BARCODE_READER_REQUEST_CODE = 1;

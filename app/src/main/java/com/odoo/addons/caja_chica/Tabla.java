@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -86,15 +87,15 @@ public class Tabla
     /**
      * Agrega una fila a la tabla
      * @param elementos Elementos de la fila
+     *                  Clase original
      */
-    public void agregarFilaTabla(ArrayList<String> elementos)
-    {
+    public void agregarFilaTabla(ArrayList<String> elementos){
         TableRow.LayoutParams layoutCelda;
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         TableRow fila = new TableRow(actividad);
         fila.setLayoutParams(layoutFila);
-        for(int i = 0; i< elementos.size(); i++)
-        {
+
+        for(int i = 0; i< elementos.size(); i++){
             TextView texto = new TextView(actividad);
             texto.setText(String.valueOf(elementos.get(i)));
             texto.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -114,16 +115,15 @@ public class Tabla
         FILAS++;
     }
 
-    public void agregarFilaTabla(final ArrayList<String> elementos, final int position)
-    {
+/**
+ * Nueva clase usada por recepcion de repuestos
+* */
+    public void agregarFilaTabla(final ArrayList<String> elementos, final int position){
         TableRow.LayoutParams layoutCelda;
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         TableRow fila = new TableRow(actividad);
-
-
         if (position % 2 == 0){
             fila.setBackgroundResource(R.drawable.tabla_celda_impar);
-
         } else {
             fila.setBackgroundResource(R.drawable.tabla_celda_par);
         }
@@ -133,7 +133,6 @@ public class Tabla
 
             @Override
             public boolean onLongClick(View v) {
-//                ReceiveOrderDialogFragment dialogFragment = new ReceiveOrderDialogFragment();
                 FragmentTransaction ft = actividad.getFragmentManager().beginTransaction();
                 android.app.Fragment prev = actividad.getFragmentManager().findFragmentByTag("dialog");
                 if(prev != null){
@@ -141,21 +140,30 @@ public class Tabla
                 }
                 ReceiveOrderDialogFragment newFragment = ReceiveOrderDialogFragment.newInstance(1,elementos, actividad);
                 newFragment.show(actividad.getFragmentManager(), "dialog");
-
                 return false;
             }
         });
         fila.setLayoutParams(layoutFila);
-        for(int i = 0; i< 2; i++)
-        {
-            TextView texto = new TextView(actividad);
-            texto.setText(String.valueOf(elementos.get(i)));
-            texto.setGravity(Gravity.CENTER_HORIZONTAL);
-            texto.setTextAppearance(actividad, R.style.estilo_celda);
-            layoutCelda = new TableRow.LayoutParams(obtenerAnchoPixelesTexto(texto.getText().toString()), TableRow.LayoutParams.WRAP_CONTENT);
-            texto.setLayoutParams(layoutCelda);
-
-            fila.addView(texto);
+        for(int i = 0; i< 3; i++){
+            if( i == 0){
+                ImageView statusIcon = new ImageView(actividad.getApplicationContext());
+                String status = String.valueOf(elementos.get(0));
+                if (status.equals("true")) {
+                    statusIcon.setImageResource(R.drawable.ic_check_black_24dp);
+                }else {
+                    statusIcon.setImageResource(R.drawable.ic_close_black_24dp);
+                }
+                statusIcon.setLayoutParams(new TableRow.LayoutParams(12, TableRow.LayoutParams.WRAP_CONTENT));
+                fila.addView(statusIcon);
+            }else {
+                TextView texto = new TextView(actividad);
+                texto.setText(String.valueOf(elementos.get(i)));
+                texto.setGravity(Gravity.CENTER_HORIZONTAL);
+                texto.setTextAppearance(actividad, R.style.estilo_celda);
+                layoutCelda = new TableRow.LayoutParams(obtenerAnchoPixelesTexto(texto.getText().toString()), TableRow.LayoutParams.WRAP_CONTENT);
+                texto.setLayoutParams(layoutCelda);
+                fila.addView(texto);
+            }
         }
 
         tabla.addView(fila);

@@ -225,7 +225,7 @@
 
         <activity android:name=".addons.workshop.ReceivingOrdersDetails"/>
         <activity android:name=".addons.workshop.BarcodeCaptureActivity"/>
-        <activity android:name=".addons.workshop.SimpleScannerFragmentActivity"/>
+        <activity android:name=".addons.workshop.autopart_receiving.SimpleScannerFragmentActivity"/>
 
     </application>
 

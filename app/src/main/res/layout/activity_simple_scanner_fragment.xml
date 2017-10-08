@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment android:name="com.odoo.addons.workshop.SimpleScannerFragment"
+    <fragment android:name="com.odoo.addons.workshop.autopart_receiving.SimpleScannerFragment"
         android:id="@+id/scanner_fragment"
         android:layout_weight="1"
         android:layout_width="match_parent"

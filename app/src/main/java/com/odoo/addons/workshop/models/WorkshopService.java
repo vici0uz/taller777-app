@@ -44,7 +44,7 @@ public class WorkshopService extends OModel{
     OColumn multi_images_delivered = new OColumn("Delivered Images", OText.class);
     OColumn job_no = new OColumn("Job Number", OVarchar.class).setSize(10);
     OColumn n_incident = new OColumn("Incident Number", OVarchar.class).setSize(64);
-
+    // FIXME: 22/09/17 Cambiar a OBoolean
     @Odoo.Functional(method="storeHaveImages", depends={"multi_images", "multi_images_received", "multi_images_delivered"}, store = true)
     OColumn have_images = new OColumn("Have pictures?", OVarchar.class);
     OColumn autopart_ids = new OColumn("Autopart Receiving Order", WorkshopAutopartReceiving.class, OColumn.RelationType.OneToMany).setRelatedColumn("service_id");

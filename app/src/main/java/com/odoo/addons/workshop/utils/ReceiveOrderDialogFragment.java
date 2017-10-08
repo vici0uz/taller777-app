@@ -16,12 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.odoo.R;
-import com.odoo.addons.workshop.SimpleScannerFragmentActivity;
+import com.odoo.addons.workshop.autopart_receiving.SimpleScannerFragmentActivity;
 import com.odoo.addons.workshop.models.WorkshopAutopartReceivingLot;
 import com.odoo.core.orm.ODataRow;
 
 import de.greenrobot.event.EventBus;
-import de.greenrobot.event.EventBus;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,7 +53,7 @@ public class ReceiveOrderDialogFragment extends DialogFragment {
         mContext = getActivity().getApplicationContext();
         lot_id = getArguments().getInt("lot_id");
 
-        view = (View)inflater.inflate(R.layout.fragment_dialog_r_order,null);
+        view = (View)inflater.inflate(R.layout.fragment_dialog_from_rec_details_to_scan,null);
         TextView autopart_name = (TextView)view.findViewById(R.id.autopart_name);
         tvUbicacion = (TextView) view.findViewById(R.id.ub_autopart);
         tvUbicacion.setText(getArguments().getString("stock_location_adapter"));
@@ -145,10 +145,10 @@ public class ReceiveOrderDialogFragment extends DialogFragment {
 
         f.actividad = actividad;
         Bundle args = new Bundle();
-        String autopartName = elementos.get(0);
-        Integer autopartQty = Integer.parseInt(elementos.get(1));
-        String stockLocation = elementos.get(2);
-        int id = Integer.parseInt(elementos.get(3));
+        String autopartName = elementos.get(1);
+        Integer autopartQty = Integer.parseInt(elementos.get(2));
+        String stockLocation = elementos.get(3);
+        int id = Integer.parseInt(elementos.get(4));
         System.out.println("LOT ID " + id);
         args.putInt("num", num);
         args.putString("autopart_name", autopartName);

@@ -3,15 +3,20 @@ package com.odoo.addons.workshop;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.odoo.App;
 import com.odoo.R;
 import com.odoo.addons.customers.CustomerDetails;
+import com.odoo.addons.workshop.autopart_receiving.Order;
 import com.odoo.addons.workshop.images.ImagesActivity;
+import com.odoo.addons.workshop.models.WorkshopAutopartReceiving;
 import com.odoo.addons.workshop.models.WorkshopService;
 import com.odoo.base.addons.ir.feature.OFileManager;
 import com.odoo.core.orm.ODataRow;
@@ -20,6 +25,11 @@ import com.odoo.core.support.OUser;
 import com.odoo.core.support.OdooCompatActivity;
 import com.odoo.core.utils.IntentUtils;
 import com.odoo.core.utils.OStringColorUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import odoo.controls.OForm;
 
@@ -43,6 +53,7 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
     private String[] imgs = new String[3];
     private OUser mUser;
     private int rowId;
+    private WorkshopAutopartReceiving receiving;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -138,6 +149,25 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
                 intent.putExtra("id",rowId);
                 intent.putExtra("username", mUser.getName());
                 startActivity(intent);
+                break;
+            case R.id.to_receive_orders:
+
+                List autopart_receiving_ids = record.getO2MRecord("autopart_ids").browseEach();
+                if (autopart_receiving_ids.size() > 0) {
+                    setupList(autopart_receiving_ids);
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    Fragment prev = getSupportFragmentManager().findFragmentByTag("rec_dialog");
+                    if (prev != null) {
+                        ft.remove(prev);
+                    }
+                    ServiceOrdersDialogFragment newFragment = ServiceOrdersDialogFragment.newInstance(this, setupList(autopart_receiving_ids));
+                    newFragment.show(getSupportFragmentManager(), "rec_dialog");
+                }
+                else
+                    Toast.makeText(app, "No Receiving Orders", Toast.LENGTH_LONG).show();
+
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -183,5 +213,39 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
             bundle.putInt("_id", record.getInt(field));
             bundle.putString("partner_type", "Customer");
             IntentUtils.startActivity(this, CustomerDetails.class, bundle);
+    }
+
+    private ArrayList setupList(List lines){
+
+        ArrayList<Order> ordenes = new ArrayList<Order>();
+        if (lines.size()>0){
+            for(int i =0; i <lines.size(); i++){
+                String l = lines.get(i).toString();
+                System.out.println(l);
+                String name = "";
+                String fecha = "";
+                int id = 1;
+//              Nombre
+                Pattern patternName = Pattern.compile("\\sname=(.*?),");
+                Matcher matcherName = patternName.matcher(l);
+                if (matcherName.find())
+                     name = matcherName.group(1);
+
+//              Fecha
+                Pattern patternFecha = Pattern.compile("\\screate_date=(.*?)\\s");
+                Matcher matcherFecha = patternFecha.matcher(l);
+                if (matcherFecha.find())
+                    fecha = matcherFecha.group(1);
+
+                Pattern patternId = Pattern.compile("\\s_id=(.*?),");
+                Matcher matcherId = patternId.matcher(l);
+                if (matcherId.find())
+                    id = Integer.parseInt(matcherId.group(1));
+
+                ordenes.add(new Order(name, fecha, id));
+            }
+
+        }
+        return ordenes;
     }
 }

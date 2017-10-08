@@ -1,4 +1,4 @@
-package com.odoo.addons.workshop;
+package com.odoo.addons.workshop.autopart_receiving;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.zxing.Result;
 
@@ -32,8 +31,8 @@ public class SimpleScannerFragment extends Fragment implements ZXingScannerView.
 
     @Override
     public void handleResult(Result rawResult) {
-        Toast.makeText(getActivity(), "Contents = " + rawResult.getText() +
-                ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "Contents = " + rawResult.getText() +
+//                ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();
         ((OnCodeScanned) activity).onNewCodeScanned(rawResult.getText());
         // Note:
         // * Wait 2 seconds to resume the preview.
