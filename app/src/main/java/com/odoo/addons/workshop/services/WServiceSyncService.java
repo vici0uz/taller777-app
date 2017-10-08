@@ -16,7 +16,7 @@ public class WServiceSyncService extends OSyncService {
     public static final String TAG = WServiceSyncService.class.getSimpleName();
 
     @Override
-    public OSyncAdapter getSyncAdapter(OSyncService service, Context context){
+    public OSyncAdapter getSyncAdapter(OSyncService service, Context context) {
         return new OSyncAdapter(context, WorkshopService.class, service, true);
     }
 

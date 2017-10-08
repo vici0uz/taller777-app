@@ -6,14 +6,10 @@ import android.net.Uri;
 import com.odoo.BuildConfig;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.OValues;
-import com.odoo.core.orm.annotation.Odoo;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.OBoolean;
 import com.odoo.core.orm.fields.types.OVarchar;
-import com.odoo.core.rpc.helper.OArguments;
 import com.odoo.core.support.OUser;
-
-import org.json.JSONArray;
 
 /**
  * Created by alan on 28/04/17.
@@ -27,20 +23,21 @@ public class WorkshopAutopartReceiving extends OModel {
     OColumn service_id = new OColumn("Service", WorkshopService.class, OColumn.RelationType.ManyToOne);
     OColumn vehicle_id = new OColumn("Vehicle", WorkshopVehicle.class, OColumn.RelationType.ManyToOne);
 
-//    @Odoo.Functional(method="setProcessed", depends = {"autopart_receiving_lot_ids"}, store=true)
+    //    @Odoo.Functional(method="setProcessed", depends = {"autopart_receiving_lot_ids"}, store=true)
     OColumn processed = new OColumn("Processed", OBoolean.class).setDefaultValue(false);
 
     public WorkshopAutopartReceiving(Context context, OUser user) {
         super(context, "workshop.autopart.receiving", user);
         setHasMailChatter(true);
     }
-//    Funcion que tiene que retornar "true" o "false"
+
+    //    Funcion que tiene que retornar "true" o "false"
     public String setProcessed(OValues values) {
         System.out.println(values);
         return "true";
     }
 
-    public Uri uri(){
+    public Uri uri() {
         return buildURI(AUTHORITY);
     }
 

@@ -16,12 +16,12 @@ public class AutopartSyncService extends OSyncService {
     public static final String TAG = AutopartSyncService.class.getSimpleName();
 
     @Override
-    public OSyncAdapter getSyncAdapter(OSyncService service, Context context){
+    public OSyncAdapter getSyncAdapter(OSyncService service, Context context) {
         return new OSyncAdapter(context, WorkshopAutopartReceiving.class, service, true);
-        }
+    }
 
     @Override
-    public void performDataSync(OSyncAdapter adapter, Bundle extras, OUser user){
+    public void performDataSync(OSyncAdapter adapter, Bundle extras, OUser user) {
         adapter.syncDataLimit(80);
     }
 }

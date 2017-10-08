@@ -37,6 +37,7 @@ import java.util.regex.Pattern;
 
 import de.greenrobot.event.EventBus;
 import odoo.controls.OForm;
+
 /**
  * Created by alan on 04/05/17.
  */
@@ -125,7 +126,7 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
         List lines = record.getO2MRecord("autopart_receiving_lot_ids").browseEach();
         autopartType = new WorkshopNewAutopartType(this, null);
         stockLocation = new WorkshopAutopartStockLocation(this, null);
-        receivingLot = new WorkshopAutopartReceivingLot(this,null);
+        receivingLot = new WorkshopAutopartReceivingLot(this, null);
         ArrayList<String> parte = new ArrayList<>();
         ArrayList<String> cantidad = new ArrayList<>();
         ArrayList<String> location = new ArrayList<>();
@@ -169,7 +170,7 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
 //            Check
             Pattern patternStored = Pattern.compile("\\sstored=(.*?),");
             Matcher matcherStored = patternStored.matcher(l);
-            if (matcherStored.find()){
+            if (matcherStored.find()) {
                 String st = matcherStored.group(1);
                 stored.add(st);
             }
@@ -200,7 +201,7 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
     }
 
     // TODO: 16/07/17 Cambiar de EventBus a una interface
-    public void onEvent(MessageEvent event){
+    public void onEvent(MessageEvent event) {
         int lotId = event.lotId;
         int locationId = event.locationId;
         ODataRow registro = receivingLot.browse(lotId);
@@ -208,25 +209,25 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
         OValues values = new OValues();
         String sqlStr = "SELECT _id FROM workshop_autopart_stock_location WHERE id = ?";
         String[] arr = new String[1];
-        arr[0]= String.valueOf(locationId);
+        arr[0] = String.valueOf(locationId);
         List<ODataRow> q = stockLocation.query(sqlStr, arr);
-        int locID =q.get(0).getInt("_id");
+        int locID = q.get(0).getInt("_id");
         values.put("stock_location_id", locID);
         values.put("stored", "true");
 
         List lines = record.getO2MRecord("autopart_receiving_lot_ids").browseEach();
         Boolean marcador = new Boolean(true);
-        for(int i=0; i < lines.size(); i++){
+        for (int i = 0; i < lines.size(); i++) {
             Pattern patternStored = Pattern.compile("\\sstored=(.*?),");
             Matcher matcherStored = patternStored.matcher(lines.get(i).toString());
-            if (matcherStored.find()){
+            if (matcherStored.find()) {
                 String st = matcherStored.group(1);
-                System.out.println("ALAN DEBUG: valor st" +st);
+                System.out.println("ALAN DEBUG: valor st" + st);
 
-                if(st.equals("false"))
+                if (st.equals("false"))
                     marcador = false;
             }
-            if (marcador.equals(false)){
+            if (marcador.equals(false)) {
                 break;
             }
         }
@@ -239,37 +240,37 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
-        if(!EventBus.getDefault().isRegistered(this)){
+        if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_receive_order_detail, menu);
         mMenu = menu;
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.menu_accion:
 //                if(record.getString("processed").equals("false"))
 //                    Toast.makeText(mContext, R.string.toast_not_processed, Toast.LENGTH_SHORT).show();
 //                else {
-                    System.out.println("impresa");
-                    Toast.makeText(mContext, R.string.toast_printing, Toast.LENGTH_SHORT).show();
-                    RecOrderOperations recOrderOperations = new RecOrderOperations();
-                    recOrderOperations.execute(record);
+                System.out.println("impresa");
+                Toast.makeText(mContext, R.string.toast_printing, Toast.LENGTH_SHORT).show();
+                RecOrderOperations recOrderOperations = new RecOrderOperations();
+                recOrderOperations.execute(record);
 //                }
                 break;
         }
@@ -277,7 +278,7 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
 
     }
 
-    private class RecOrderOperations extends AsyncTask<ODataRow, Void, Void>{
+    private class RecOrderOperations extends AsyncTask<ODataRow, Void, Void> {
 
         @Override
         protected Void doInBackground(ODataRow... params) {
@@ -285,7 +286,7 @@ public class ReceivingOrdersDetails extends OdooCompatActivity implements View.O
             JSONArray dat = new JSONArray();
             dat.put(record.getInt("id"));
             args.add(dat);
-            workshopAutopartReceiving.getServerDataHelper().callMethod("print_direct_report",args);
+            workshopAutopartReceiving.getServerDataHelper().callMethod("print_direct_report", args);
             return null;
         }
     }

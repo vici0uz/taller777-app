@@ -8,7 +8,7 @@ public class MessageEvent {
     public final int lotId;
     public final int locationId;
 
-    public MessageEvent(int lotId, int locationId){
+    public MessageEvent(int lotId, int locationId) {
         this.lotId = lotId;
         this.locationId = locationId;
     }

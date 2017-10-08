@@ -12,16 +12,16 @@ import com.odoo.core.support.OUser;
  * Created by alan on 24/06/17.
  */
 
-public class ReceivingLotSyncService extends OSyncService{
+public class ReceivingLotSyncService extends OSyncService {
     public static final String TAG = ReceivingLotSyncService.class.getSimpleName();
 
     @Override
-    public OSyncAdapter getSyncAdapter(OSyncService lot, Context context){
+    public OSyncAdapter getSyncAdapter(OSyncService lot, Context context) {
         return new OSyncAdapter(context, WorkshopAutopartReceivingLot.class, lot, true);
     }
 
     @Override
-    public void performDataSync(OSyncAdapter adapter, Bundle extras, OUser user){
+    public void performDataSync(OSyncAdapter adapter, Bundle extras, OUser user) {
         adapter.syncDataLimit(80);
     }
 }

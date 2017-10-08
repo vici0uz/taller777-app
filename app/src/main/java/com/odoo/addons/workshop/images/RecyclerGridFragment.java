@@ -1,8 +1,8 @@
 package com.odoo.addons.workshop.images;
 
 import android.annotation.SuppressLint;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,26 +27,26 @@ import java.util.ArrayList;
  */
 
 public class RecyclerGridFragment extends Fragment {
+    public DataAdapter dataAdapter;
     int color;
     private String imgBruto;
     private ArrayList<String> arregloImagenes;
-    public DataAdapter dataAdapter;
     private TextView emptyView;
     private RecyclerView recyclerView;
     private FrameLayout frameLayout;
     private View fView;
 
-    public RecyclerGridFragment(){
+    public RecyclerGridFragment() {
     }
 
     @SuppressLint("ValidFragment")
-    public RecyclerGridFragment(int color, String imgBruto){
+    public RecyclerGridFragment(int color, String imgBruto) {
         this.color = color;
         this.imgBruto = imgBruto;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fView = inflater.inflate(R.layout.fragment, container, false);
 
         frameLayout = (FrameLayout) fView.findViewById(R.id.frag_bg);
@@ -57,14 +57,14 @@ public class RecyclerGridFragment extends Fragment {
         emptyView = (TextView) fView.findViewById(R.id.empty_view);
 
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2 );
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
 
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setHasFixedSize(true);
 
         arregloImagenes = prepareData(imgBruto);
 
-        dataAdapter = new DataAdapter(getActivity().getApplicationContext(),arregloImagenes);
+        dataAdapter = new DataAdapter(getActivity().getApplicationContext(), arregloImagenes);
 
         checkEmpty();
         recyclerView.setAdapter(dataAdapter);
@@ -72,15 +72,15 @@ public class RecyclerGridFragment extends Fragment {
         return fView;
     }
 
-    private ArrayList<String> prepareData(String imgs){
+    private ArrayList<String> prepareData(String imgs) {
         ArrayList<String> temporal = new ArrayList<String>();
         String images = imgs;
         JSONParser parser = new JSONParser();
-        arregloImagenes = new  ArrayList<String>();
+        arregloImagenes = new ArrayList<String>();
         try {
             Object object = parser.parse(images);
-            JSONArray array = (JSONArray)object;
-            for (Object img:array){
+            JSONArray array = (JSONArray) object;
+            for (Object img : array) {
                 try {
                     JSONObject object1 = new JSONObject(img.toString());
                     String imgName = object1.get("name").toString();
@@ -98,18 +98,18 @@ public class RecyclerGridFragment extends Fragment {
     }
 
 
-    private void checkEmpty(){
-        if(dataAdapter.getItemCount()<=0){
+    private void checkEmpty() {
+        if (dataAdapter.getItemCount() <= 0) {
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
         }
     }
 
 
-    public void updateFrag(String msg){
+    public void updateFrag(String msg) {
         arregloImagenes.clear();
         arregloImagenes.addAll(prepareData(msg));
         dataAdapter.notifyDataSetChanged();

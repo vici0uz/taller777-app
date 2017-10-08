@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Created by alan on 05/10/17.
  */
 
-public class ServiceOrdersDialogFragment extends DialogFragment  {
+public class ServiceOrdersDialogFragment extends DialogFragment {
     private Context mContext;
     private View mView;
     private Activity actividad;
@@ -29,8 +29,18 @@ public class ServiceOrdersDialogFragment extends DialogFragment  {
     private RecyclerView.LayoutManager mLayoutManager;
     private OrderAdapter orderAdapter;
 
+    public static ServiceOrdersDialogFragment newInstance(Activity activity, ArrayList ordenes) {
+
+        ServiceOrdersDialogFragment sOrdersDialogFragment = new ServiceOrdersDialogFragment();
+
+        sOrdersDialogFragment.actividad = activity;
+        sOrdersDialogFragment.ordenes = ordenes;
+
+        return sOrdersDialogFragment;
+    }
+
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
 
         mContext = getActivity().getApplicationContext();
@@ -46,15 +56,5 @@ public class ServiceOrdersDialogFragment extends DialogFragment  {
 
         mRecyclerView.setAdapter(orderAdapter);
         return builder.create();
-    }
-
-    public static ServiceOrdersDialogFragment newInstance(Activity activity, ArrayList ordenes){
-
-        ServiceOrdersDialogFragment sOrdersDialogFragment = new ServiceOrdersDialogFragment();
-
-        sOrdersDialogFragment.actividad = activity;
-        sOrdersDialogFragment.ordenes = ordenes;
-
-        return sOrdersDialogFragment;
     }
 }

@@ -13,8 +13,8 @@ import com.google.zxing.Result;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class SimpleScannerFragment extends Fragment implements ZXingScannerView.ResultHandler {
-    private ZXingScannerView mScannerView;
     Activity activity;
+    private ZXingScannerView mScannerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,12 +54,12 @@ public class SimpleScannerFragment extends Fragment implements ZXingScannerView.
     }
 
     @Override
-    public void onAttach(Activity activity){
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.activity = activity;
     }
 
-    public interface OnCodeScanned{
+    public interface OnCodeScanned {
         void onNewCodeScanned(String ubicacion);
     }
 }

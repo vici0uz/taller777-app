@@ -79,12 +79,12 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
         prepareData();
     }
 
-    private boolean hasRecordInExtra(){
+    private boolean hasRecordInExtra() {
         return extras != null && extras.containsKey(OColumn.ROW_ID);
     }
 
-    private void setMode(Boolean edit){
-        if(mMenu != null){
+    private void setMode(Boolean edit) {
+        if (mMenu != null) {
             mMenu.findItem(R.id.menu_service_detail_more).setVisible(!edit);
             mMenu.findItem(R.id.menu_service_edit).setVisible(!edit);
             mMenu.findItem(R.id.menu_service_save).setVisible(edit);
@@ -95,7 +95,7 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
             color = OStringColorUtil.getStringColor(this, record.getString("name"));
         }
         if (edit) {
-            if(!hasRecordInExtra()){
+            if (!hasRecordInExtra()) {
                 toolbar.setTitle("New");
             }
             // Futura edicion
@@ -110,12 +110,12 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
         setColor(color);
     }
 
-    private void setColor(int color){
+    private void setColor(int color) {
         mForm.setIconTintColor(color);
     }
 
 
-    private void setupToolbar(){
+    private void setupToolbar() {
         if (!hasRecordInExtra()) {
             setMode(mEditMode);
             mForm.setEditable(mEditMode);
@@ -133,7 +133,7 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_service_detail, menu);
         mMenu = menu;
         setMode(mEditMode);
@@ -141,12 +141,12 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.service_images:
                 Intent intent = new Intent(this, ImagesActivity.class);
                 intent.putExtra("images", imgs);
-                intent.putExtra("id",rowId);
+                intent.putExtra("id", rowId);
                 intent.putExtra("username", mUser.getName());
                 startActivity(intent);
                 break;
@@ -162,8 +162,7 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
                     }
                     ServiceOrdersDialogFragment newFragment = ServiceOrdersDialogFragment.newInstance(this, setupList(autopart_receiving_ids));
                     newFragment.show(getSupportFragmentManager(), "rec_dialog");
-                }
-                else
+                } else
                     Toast.makeText(app, "No Receiving Orders", Toast.LENGTH_LONG).show();
 
                 break;
@@ -178,27 +177,29 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
         outState.putBoolean(KEY_MODE, mEditMode);
     }
 
-    private void prepareData(){
-        imgs[0] = (!record.getString("multi_images").equals("false"))? record.getString("multi_images"): "";
+    private void prepareData() {
+        imgs[0] = (!record.getString("multi_images").equals("false")) ? record.getString("multi_images") : "";
         imgs[1] = (!record.getString("multi_images_received").equals("false")) ? record.getString("multi_images_received") : "";
         imgs[2] = (!record.getString("multi_images_delivered").equals("false")) ? record.getString("multi_images_delivered") : "";
     }
-    private void setView(){
-        if (!record.getBoolean("t_insurance")){
+
+    private void setView() {
+        if (!record.getBoolean("t_insurance")) {
             findViewById(R.id.t_insurance).setVisibility(View.GONE);
             findViewById(R.id.insurer_id).setVisibility(View.GONE);
             findViewById(R.id.n_incident).setVisibility(View.GONE);
         }
     }
 
-    private void checkControls(){
+    private void checkControls() {
         findViewById(R.id.partner_id).setOnClickListener(this);
         findViewById(R.id.insurer_id).setOnClickListener(this);
     }
+
     @Override
     public void onClick(View view) {
         // TODO: 05/03/17 Crear VehicleDetails y apuntar a el vehiculo
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.partner_id:
                 loadActivity("partner_id");
                 break;
@@ -208,18 +209,18 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
         }
     }
 
-    private void loadActivity(String field){
-            Bundle bundle = new Bundle();
-            bundle.putInt("_id", record.getInt(field));
-            bundle.putString("partner_type", "Customer");
-            IntentUtils.startActivity(this, CustomerDetails.class, bundle);
+    private void loadActivity(String field) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("_id", record.getInt(field));
+        bundle.putString("partner_type", "Customer");
+        IntentUtils.startActivity(this, CustomerDetails.class, bundle);
     }
 
-    private ArrayList setupList(List lines){
+    private ArrayList setupList(List lines) {
 
         ArrayList<Order> ordenes = new ArrayList<Order>();
-        if (lines.size()>0){
-            for(int i =0; i <lines.size(); i++){
+        if (lines.size() > 0) {
+            for (int i = 0; i < lines.size(); i++) {
                 String l = lines.get(i).toString();
                 System.out.println(l);
                 String name = "";
@@ -229,7 +230,7 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
                 Pattern patternName = Pattern.compile("\\sname=(.*?),");
                 Matcher matcherName = patternName.matcher(l);
                 if (matcherName.find())
-                     name = matcherName.group(1);
+                    name = matcherName.group(1);
 
 //              Fecha
                 Pattern patternFecha = Pattern.compile("\\screate_date=(.*?)\\s");

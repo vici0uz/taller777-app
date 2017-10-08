@@ -16,12 +16,12 @@ public class WorkshopAutopartStockLocationService extends OSyncService {
     public static final String TAG = WorkshopAutopartStockLocationService.class.getSimpleName();
 
     @Override
-    public OSyncAdapter getSyncAdapter(OSyncService location, Context context){
+    public OSyncAdapter getSyncAdapter(OSyncService location, Context context) {
         return new OSyncAdapter(context, WorkshopAutopartStockLocation.class, location, true);
     }
 
     @Override
-    public void performDataSync(OSyncAdapter adapter, Bundle extras, OUser user){
+    public void performDataSync(OSyncAdapter adapter, Bundle extras, OUser user) {
         adapter.syncDataLimit(80);
     }
 }

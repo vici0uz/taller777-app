@@ -40,27 +40,26 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.odoo.core.utils.sys.OCacheUtils.deleteDir;
-
 
 /**
  * Created by alan on 26/01/17.
  */
 
-public class ImagesActivity extends AppCompatActivity  {
+public class ImagesActivity extends AppCompatActivity {
 
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private final String urlTaller = "http://www.taller777.com.py:8072";
-    private ArrayList<String> arregloImagenes;
-    private FloatingActionButton fab;
     private static final int INTENT_REQUEST_GET_IMAGES = 13;
     private static final String TAG = ImagesActivity.class.getSimpleName();
-    private String url = "http://www.taller777.com.py:7979/uploader";
-//    private String url = "http://192.168.1.5:7979/uploader";
-    private MediaType type = MediaType.parse("image/jpeg");
     private static final String ALAN = "ALAN DEBUG : ";
-
+    private final String urlTaller = "http://www.taller777.com.py:8072";
+    int MY_PERMISSIONS_REQUEST_CAMERA = 10;
+    int MY_PERMISSIONS_REQUEST_WRITE = 20;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private ArrayList<String> arregloImagenes;
+    private FloatingActionButton fab;
+    private String url = "http://www.taller777.com.py:7979/uploader";
+    //    private String url = "http://192.168.1.5:7979/uploader";
+    private MediaType type = MediaType.parse("image/jpeg");
     private String[] imgs;
     private Bundle extras;
     private WorkshopService workshopService;
@@ -70,8 +69,16 @@ public class ImagesActivity extends AppCompatActivity  {
     private String field;
     private Pager mAdapter;
     private String userName;
-    int MY_PERMISSIONS_REQUEST_CAMERA = 10;
-    int MY_PERMISSIONS_REQUEST_WRITE = 20;
+
+    public static void deleteCache(Context context) {
+        try {
+            File cachePicasso = new File(context.getCacheDir(), "picasso-cache");
+            if (cachePicasso != null && cachePicasso.isDirectory()) {
+                FileUtils.deleteDirectory(cachePicasso);
+            }
+        } catch (Exception e) {
+        }
+    }
 
     // TODO: 28/03/17 Mantener una cache minima de 5mb de picasso
     // TODO: 04/04/17 Cambiar items de imageview a cardview
@@ -207,11 +214,11 @@ public class ImagesActivity extends AppCompatActivity  {
                     OkHttpClient client = new OkHttpClient();
                     MultipartBody.Builder builderNew = new MultipartBody.Builder()
                             .setType(MultipartBody.FORM);
-                    if(imgs[tabLayout.getSelectedTabPosition()].length()>1){
+                    if (imgs[tabLayout.getSelectedTabPosition()].length() > 1) {
                         builderNew.addFormDataPart("images", imgs[tabLayout.getSelectedTabPosition()]);
                     }
-                    // TODO: 25/02/17 Corregir Tema hora guardado Imagen Servidor 
-                    builderNew.addFormDataPart("user",userName);
+                    // TODO: 25/02/17 Corregir Tema hora guardado Imagen Servidor
+                    builderNew.addFormDataPart("user", userName);
                     for (Uri uri : uris) {
                         File f = new File(uri.getPath());
                         if (f.exists()) {
@@ -227,16 +234,16 @@ public class ImagesActivity extends AppCompatActivity  {
                     call.enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                                e.printStackTrace();
-                            }
+                            e.printStackTrace();
+                        }
 
-                        // TODO: 25/02/17 Mostrar cantidad imagenes subidas 
+                        // TODO: 25/02/17 Mostrar cantidad imagenes subidas
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
-                            if (response.isSuccessful()){
+                            if (response.isSuccessful()) {
                                 final int tabPos = tabLayout.getSelectedTabPosition();
                                 final String msg = response.body().string();
-                                switch (tabPos){
+                                switch (tabPos) {
                                     case 0:
                                         field = "multi_images";
                                         break;
@@ -272,16 +279,6 @@ public class ImagesActivity extends AppCompatActivity  {
             }
         }
     }
-
-    public static void deleteCache(Context context) {
-        try {
-            File cachePicasso = new File(context.getCacheDir(),"picasso-cache");
-            if (cachePicasso != null && cachePicasso.isDirectory()) {
-                FileUtils.deleteDirectory(cachePicasso);
-            }
-        } catch (Exception e) {}
-    }
-
 
     @Override
     public void onBackPressed() {

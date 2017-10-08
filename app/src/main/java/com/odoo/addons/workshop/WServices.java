@@ -1,16 +1,13 @@
 package com.odoo.addons.workshop;
 
-import android.Manifest;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,7 +43,7 @@ import java.util.List;
 public class WServices extends BaseFragment implements OCursorListAdapter.OnViewBindListener,
         LoaderManager.LoaderCallbacks<Cursor>, SwipeRefreshLayout.OnRefreshListener,
         View.OnClickListener, ISyncStatusObserverListener, IOnSearchViewChangeListener,
-        AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener{
+        AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
     public static final String KEY = WServices.class.getSimpleName();
     private View mView;
@@ -64,7 +61,7 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasSwipeRefreshView(view, R.id.swipe_container, this);
         mView = view;
@@ -85,8 +82,8 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
     public List<ODrawerItem> drawerMenus(Context context) {
         List<ODrawerItem> items = new ArrayList<>();
         items.add(new ODrawerItem(KEY).setTitle("Services")
-        .setIcon(R.drawable.ic_view_list_black_24dp)
-        .setInstance(new WServices()));
+                .setIcon(R.drawable.ic_view_list_black_24dp)
+                .setInstance(new WServices()));
         return items;
     }
 
@@ -97,7 +94,7 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
 
     @Override
     public void onViewBind(View view, Cursor cursor, ODataRow row) {
-        if(!row.getBoolean("have_images"))
+        if (!row.getBoolean("have_images"))
             OControls.setGone(view, R.id.have_images_badge);
         OControls.setText(view, R.id.name, row.getString("name"));
     }
@@ -106,19 +103,19 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
     public Loader<Cursor> onCreateLoader(int id, Bundle data) {
         List<String> args = new ArrayList<>();
         String where = "";
-        if(mCurfilter != null){
+        if (mCurfilter != null) {
             where += "name like ? COLLATE NOCASE";
             args.add("%" + mCurfilter + "%");
-            if(wState != null){
+            if (wState != null) {
                 where += " and state like ?";
                 args.add("%" + wState + "%");
             }
-        }else if (wState != null){
+        } else if (wState != null) {
             where += "state like ?";
             args.add("%" + wState + "%");
         }
         String selection = (args.size() > 0) ? where : null;
-        String[] selectionArgs = (args.size() > 0) ? args.toArray(new String[args.size()]): null;
+        String[] selectionArgs = (args.size() > 0) ? args.toArray(new String[args.size()]) : null;
         return new CursorLoader(getActivity(), db().uri(), null, selection, selectionArgs, "name");
     }
 
@@ -215,17 +212,17 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
         loadActivity(row);
     }
 
-    private void loadActivity(ODataRow row){
+    private void loadActivity(ODataRow row) {
         Bundle data = new Bundle();
-        if ( row != null) {
+        if (row != null) {
             data = row.getPrimaryBundleData();
         }
         IntentUtils.startActivity(getActivity(), ServiceDetails.class, data);
     }
 
-    private void initSpinner(){
+    private void initSpinner() {
         // TODO: 13/03/17 Agregar filtro tiene imagenes 
-        if (getActivity() == null){
+        if (getActivity() == null) {
             return;
         }
         List<String> list = new ArrayList<String>();
@@ -237,7 +234,7 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
         int hidingItemIndex = 0;
 
         spinner = parent().getActionBarSpinner();
-        CustomAdapter dataAdapter = new CustomAdapter(getContext(), R.layout.spinner, list,  hidingItemIndex);
+        CustomAdapter dataAdapter = new CustomAdapter(getContext(), R.layout.spinner, list, hidingItemIndex);
         dataAdapter.setDropDownViewResource(R.layout.spinner);
 
         spinner.setAdapter(dataAdapter);
@@ -248,7 +245,7 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
 
-        switch (pos){
+        switch (pos) {
             case 1:
                 wState = "draft";
                 break;
@@ -260,7 +257,7 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
                 break;
 
         }
-        getLoaderManager().restartLoader(0,null,this);
+        getLoaderManager().restartLoader(0, null, this);
     }
 
     @Override

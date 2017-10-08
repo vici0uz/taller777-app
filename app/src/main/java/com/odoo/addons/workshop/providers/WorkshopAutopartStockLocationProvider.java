@@ -11,7 +11,7 @@ public class WorkshopAutopartStockLocationProvider extends BaseModelProvider {
     public static final String TAG = WorkshopAutopartStockLocationProvider.class.getSimpleName();
 
     @Override
-    public String authority(){
+    public String authority() {
         return WorkshopAutopartStockLocation.AUTHORITY;
     }
 }

@@ -22,7 +22,7 @@ import com.odoo.core.support.OUser;
  * Created by alan on 20/01/17.
  */
 
-public class WorkshopService extends OModel{
+public class WorkshopService extends OModel {
     public static final String AUTHORITY = BuildConfig.APPLICATION_ID +
             ".addons.workshop.content.sync.workshop_service";
 
@@ -45,11 +45,11 @@ public class WorkshopService extends OModel{
     OColumn job_no = new OColumn("Job Number", OVarchar.class).setSize(10);
     OColumn n_incident = new OColumn("Incident Number", OVarchar.class).setSize(64);
     // FIXME: 22/09/17 Cambiar a OBoolean
-    @Odoo.Functional(method="storeHaveImages", depends={"multi_images", "multi_images_received", "multi_images_delivered"}, store = true)
+    @Odoo.Functional(method = "storeHaveImages", depends = {"multi_images", "multi_images_received", "multi_images_delivered"}, store = true)
     OColumn have_images = new OColumn("Have pictures?", OVarchar.class);
     OColumn autopart_ids = new OColumn("Autopart Receiving Order", WorkshopAutopartReceiving.class, OColumn.RelationType.OneToMany).setRelatedColumn("service_id");
 
-    public WorkshopService(Context context,  OUser user) {
+    public WorkshopService(Context context, OUser user) {
         super(context, "workshop.service", user);
         setHasMailChatter(true);
     }
@@ -59,39 +59,38 @@ public class WorkshopService extends OModel{
         return buildURI(AUTHORITY);
     }
 
-    public String storeHaveImages(OValues value){
-        if(!value.getString("multi_images").equals("false") || !value.getString("multi_images_received").equals("false") || !value.getString("multi_images_delivered").equals("false"))
+    public String storeHaveImages(OValues value) {
+        if (!value.getString("multi_images").equals("false") || !value.getString("multi_images_received").equals("false") || !value.getString("multi_images_delivered").equals("false"))
             return "true";
         else
             return "false";
     }
 
     @Override
-    public ODomain defaultDomain(){
+    public ODomain defaultDomain() {
         ODomain domain = new ODomain();
         domain.add("|");
-        domain.add("state", "!=","done");
+        domain.add("state", "!=", "done");
         domain.add("state", "!=", "cancelled");
         return domain;
     }
 
 
-
     @Override
-    public boolean allowCreateRecordOnServer(){
+    public boolean allowCreateRecordOnServer() {
         return false;
     }
 
     @Override
-    public boolean allowDeleteRecordOnServer(){
+    public boolean allowDeleteRecordOnServer() {
         return false;
     }
 
     @Override
-    public void onModelUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+    public void onModelUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d("ALAN", "PUTAAAA");
-        System.out.println("ALAN Debug: db "+ db);
+        System.out.println("ALAN Debug: db " + db);
         System.out.println("ALAN DEBUG: oldVersion: " + oldVersion);
-        System.out.println("ALAN DEBUG: newVersion: "+ newVersion);
+        System.out.println("ALAN DEBUG: newVersion: " + newVersion);
     }
 }

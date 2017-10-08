@@ -44,13 +44,13 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
     private boolean syncRequested = false;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        setHasSyncStatusObserver(TAG, this,db());
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setHasSyncStatusObserver(TAG, this, db());
         return inflater.inflate(R.layout.common_listview, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mView = view;
         mReceivingOrdersList = (ListView) view.findViewById(R.id.listview);
@@ -67,8 +67,8 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
     public List<ODrawerItem> drawerMenus(Context context) {
         List<ODrawerItem> items = new ArrayList<>();
         items.add(new ODrawerItem(TAG).setTitle("Repuestos")
-        .setIcon(R.drawable.ic_move_to_inbox_black_24dp)
-        .setInstance(new ReceivingOrders()));
+                .setIcon(R.drawable.ic_move_to_inbox_black_24dp)
+                .setInstance(new ReceivingOrders()));
         return items;
     }
 
@@ -80,7 +80,7 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
     @Override
     public void onViewBind(View view, Cursor cursor, ODataRow row) {
         OControls.setText(view, R.id.name, row.getString("name"));
-        if(row.getBoolean("processed")){
+        if (row.getBoolean("processed")) {
             OControls.setVisible(view, R.id.completado);
         }
     }
@@ -94,19 +94,19 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         List<String> args = new ArrayList<>();
         String where = "";
-        if (mCurfilter != null){
+        if (mCurfilter != null) {
             where += "name like ? COLLATE NOCASE";
             args.add("%" + mCurfilter + "%");
         }
-        String selection = (args.size()>0)? where : null;
-        String[] selectionArgs = (args.size()>0) ? args.toArray(new String[args.size()]): null;
+        String selection = (args.size() > 0) ? where : null;
+        String[] selectionArgs = (args.size() > 0) ? args.toArray(new String[args.size()]) : null;
         return new CursorLoader(getActivity(), db().uri(), null, selection, selectionArgs, "create_date desc");
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mAdapter.changeCursor(data);
-        if (data.getCount() > 0){
+        if (data.getCount() > 0) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -129,7 +129,7 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
 
                 }
             }, 500);
-            if (db().isEmptyTable() && !syncRequested){
+            if (db().isEmptyTable() && !syncRequested) {
                 syncRequested = true;
                 onRefresh();
             }
@@ -143,7 +143,7 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
 
     @Override
     public void onRefresh() {
-        if(inNetwork()){
+        if (inNetwork()) {
             parent().sync().requestSync(WorkshopAutopartReceiving.AUTHORITY);
             setSwipeRefreshing(true);
         } else {
@@ -152,9 +152,9 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
         }
     }
 
-    private void loadActivity(ODataRow row){
+    private void loadActivity(ODataRow row) {
         Bundle data = new Bundle();
-        if (row != null){
+        if (row != null) {
             data = row.getPrimaryBundleData();
         }
         IntentUtils.startActivity(getActivity(), ReceivingOrdersDetails.class, data);
@@ -163,12 +163,12 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-       ODataRow row = OCursorUtils.toDatarow((Cursor) mAdapter.getItem(position));
-       loadActivity(row);
+        ODataRow row = OCursorUtils.toDatarow((Cursor) mAdapter.getItem(position));
+        loadActivity(row);
     }
 
     @Override
     public void onStatusChange(Boolean refreshing) {
-        getLoaderManager().restartLoader(0,null,this);
+        getLoaderManager().restartLoader(0, null, this);
     }
 }

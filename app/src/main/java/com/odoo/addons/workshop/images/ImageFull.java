@@ -22,7 +22,6 @@ import com.squareup.picasso.Target;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 
 import uk.co.senab.photoview.PhotoView;
 
@@ -30,17 +29,17 @@ import uk.co.senab.photoview.PhotoView;
  * Created by alan on 05/02/17.
  */
 
-public class ImageFull  extends AppCompatActivity {
+public class ImageFull extends AppCompatActivity {
+    private final static String urlTaller = "http://www.taller777.com.py:8072/web/static/src/img/image_multi/";
     private PhotoView imgV;
     private Bundle extras;
     private Context context;
     private String imgName;
-    private final static String urlTaller = "http://www.taller777.com.py:8072/web/static/src/img/image_multi/";
     private android.support.v7.widget.ShareActionProvider mShareActionProvider;
     private MenuItem item;
 
     @Override
-    protected void onCreate(Bundle savedInstanteState){
+    protected void onCreate(Bundle savedInstanteState) {
         super.onCreate(savedInstanteState);
         setContentView(R.layout.image_full);
         context = getApplicationContext();
@@ -83,7 +82,7 @@ public class ImageFull  extends AppCompatActivity {
             }
         };
         imgV.setTag(target);
-        if(extras != null) {
+        if (extras != null) {
             imgName = extras.getString("img");
             Picasso.with(context).load(urlTaller + imgName).into(target);
         }
@@ -100,32 +99,32 @@ public class ImageFull  extends AppCompatActivity {
         // Fetch and store ShareActionProvider
         mShareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(item);
 //        mShareActionProvider.setOnShareTargetSelectedListener(this);
-        if( mShareActionProvider != null){
+        if (mShareActionProvider != null) {
             shareIt();
         }
         // Return true to display menu
-        return(super.onCreateOptionsMenu(menu));
+        return (super.onCreateOptionsMenu(menu));
 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.menu_item_share:
                 shareIt();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private Intent shareIt(){
+    private Intent shareIt() {
         File imagePath = new File(context.getCacheDir(), "images");
         File newFile = new File(imagePath, "image.png");
         Uri contentUri = FileProvider.getUriForFile(context, "com.odoo.fileprovider", newFile);
         Intent share = new Intent(Intent.ACTION_SEND);
         share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        share.setDataAndType(contentUri,getContentResolver().getType(contentUri));
+        share.setDataAndType(contentUri, getContentResolver().getType(contentUri));
         share.putExtra(Intent.EXTRA_STREAM, contentUri);
         mShareActionProvider.setShareIntent(share);
-        return  share;
+        return share;
     }
 }

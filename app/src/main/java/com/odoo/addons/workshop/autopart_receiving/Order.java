@@ -10,21 +10,21 @@ public class Order {
     String fecha;
     int id;
 
-    public Order(String name, String fecha, int id){
+    public Order(String name, String fecha, int id) {
         this.name = name;
         this.fecha = fecha;
         this.id = id;
     }
 
-    public String getName(){
-        return  this.name;
+    public String getName() {
+        return this.name;
     }
 
-    public String getFecha(){
+    public String getFecha() {
         return this.fecha;
     }
 
-    public int getId(){
+    public int getId() {
         return this.id;
     }
 }

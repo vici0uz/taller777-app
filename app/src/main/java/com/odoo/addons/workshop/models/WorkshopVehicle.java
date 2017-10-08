@@ -1,9 +1,7 @@
 package com.odoo.addons.workshop.models;
 
 import android.content.Context;
-import android.net.Uri;
 
-import com.odoo.BuildConfig;
 import com.odoo.base.addons.res.ResPartner;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.fields.OColumn;

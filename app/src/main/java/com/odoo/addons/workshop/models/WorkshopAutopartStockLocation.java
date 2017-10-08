@@ -24,5 +24,7 @@ public class WorkshopAutopartStockLocation extends OModel {
         super(context, "workshop.autopart.stock.location", user);
     }
 
-    public Uri uri(){ return buildURI(AUTHORITY);}
+    public Uri uri() {
+        return buildURI(AUTHORITY);
+    }
 }

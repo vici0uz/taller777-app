@@ -49,7 +49,6 @@ import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-
 import com.odoo.R;
 import com.odoo.addons.workshop.camera.CameraSource;
 import com.odoo.addons.workshop.camera.CameraSourcePreview;
@@ -59,17 +58,13 @@ import java.io.IOException;
 public final class BarcodeCaptureActivity extends AppCompatActivity
         implements BarcodeTracker.BarcodeGraphicTrackerCallback {
 
-    private static final String TAG = "Barcode-reader";
-
-    // Intent request code to handle updating play services if needed.
-    private static final int RC_HANDLE_GMS = 9001;
-
-    // Permission request codes need to be < 256
-    private static final int RC_HANDLE_CAMERA_PERM = 2;
-
     // Constants used to pass extra data in the intent
     public static final String BarcodeObject = "Barcode";
-
+    private static final String TAG = "Barcode-reader";
+    // Intent request code to handle updating play services if needed.
+    private static final int RC_HANDLE_GMS = 9001;
+    // Permission request codes need to be < 256
+    private static final int RC_HANDLE_CAMERA_PERM = 2;
     private CameraSource mCameraSource;
     private CameraSourcePreview mPreview;
 
@@ -120,7 +115,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity
 
     /**
      * Creates and starts the camera.
-     *
+     * <p>
      * Suppressing InlinedApi since there is a check that the minimum version is met before using
      * the constant.
      */

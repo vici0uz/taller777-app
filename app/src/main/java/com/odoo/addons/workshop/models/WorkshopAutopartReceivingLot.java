@@ -7,7 +7,6 @@ import com.odoo.BuildConfig;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.OBoolean;
-import com.odoo.core.orm.fields.types.OFloat;
 import com.odoo.core.orm.fields.types.OInteger;
 import com.odoo.core.support.OUser;
 
@@ -28,7 +27,7 @@ public class WorkshopAutopartReceivingLot extends OModel {
         super(context, "workshop.autopart.receiving.lot", user);
     }
 
-    public Uri uri(){
+    public Uri uri() {
         return buildURI(AUTHORITY);
     }
 
