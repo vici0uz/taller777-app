@@ -43,7 +43,7 @@ import java.util.List;
 public class WServices extends BaseFragment implements OCursorListAdapter.OnViewBindListener,
         LoaderManager.LoaderCallbacks<Cursor>, SwipeRefreshLayout.OnRefreshListener,
         View.OnClickListener, ISyncStatusObserverListener, IOnSearchViewChangeListener,
-        AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+        AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, AdapterView.OnItemSelectedListener {
 
     public static final String KEY = WServices.class.getSimpleName();
     private View mView;
@@ -212,6 +212,8 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
         loadActivity(row);
     }
 
+
+
     private void loadActivity(ODataRow row) {
         Bundle data = new Bundle();
         if (row != null) {
@@ -229,7 +231,6 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
         list.add("Estado");   //  Initial dummy entry
         list.add("Borrador");
         list.add("Aprobado");
-        list.add("Pendiente");
 
         int hidingItemIndex = 0;
 
@@ -264,6 +265,13 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(getContext(), "Holaa", Toast.LENGTH_LONG).show();
+        return false;
+    }
+
 
     public class CustomAdapter extends ArrayAdapter<String> {
 
