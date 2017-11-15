@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -22,8 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.odoo.R;
+import com.odoo.addons.workshop.autopart_receiving.Order;
 import com.odoo.addons.workshop.models.WorkshopService;
 import com.odoo.core.orm.ODataRow;
+import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.support.addons.fragment.BaseFragment;
 import com.odoo.core.support.addons.fragment.IOnSearchViewChangeListener;
 import com.odoo.core.support.addons.fragment.ISyncStatusObserverListener;
@@ -35,6 +39,8 @@ import com.odoo.core.utils.OCursorUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by alan on 18/01/17.
@@ -52,6 +58,9 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
     private boolean syncRequested = false;
     private String wState = null;
     private Spinner spinner;
+    private ODataRow record = null;
+    private WorkshopService workshopService;
+    private int rowId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,11 +80,14 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
         mWServicesList.setAdapter(mAdapter);
         mWServicesList.setFastScrollAlwaysVisible(true);
         mWServicesList.setOnItemClickListener(this);
+        mWServicesList.setOnItemLongClickListener(this);
         parent().setHasActionBarSpinner(true);
         setHasFloatingButton(view, R.id.fabButton, mWServicesList, this);
         hideFab();
         initSpinner();
         getLoaderManager().initLoader(0, null, this);
+        workshopService = new WorkshopService(getActivity(), null);
+
     }
 
     @Override
@@ -96,6 +108,9 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
     public void onViewBind(View view, Cursor cursor, ODataRow row) {
         if (!row.getBoolean("have_images"))
             OControls.setGone(view, R.id.have_images_badge);
+
+//        List autopart_receiving_ids = row.getO2MRecord("autopart_ids").browseEach();
+//        System.out.println(autopart_receiving_ids.size());
         OControls.setText(view, R.id.name, row.getString("name"));
     }
 
@@ -256,7 +271,6 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
             case 3:
                 wState = "pending";
                 break;
-
         }
         getLoaderManager().restartLoader(0, null, this);
     }
@@ -268,7 +282,13 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getContext(), "Holaa", Toast.LENGTH_LONG).show();
+        ODataRow row = OCursorUtils.toDatarow((Cursor) mAdapter.getItem(position));
+        Bundle data = new Bundle();
+        if (row != null) {
+            data = row.getPrimaryBundleData();
+        }
+        loadDialog(data);
+
         return false;
     }
 
@@ -295,5 +315,62 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
             return v;
         }
     }
+
+
+    private void loadDialog(Bundle data){
+
+        rowId = data.getInt(OColumn.ROW_ID);
+        System.out.println("ALAN DEBUG: " + rowId);
+        record = workshopService.browse(rowId);
+
+        List autopart_receiving_ids = record.getO2MRecord("autopart_ids").browseEach();
+        if (autopart_receiving_ids.size() > 0) {
+            setupList(autopart_receiving_ids);
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            Fragment prev = getActivity().getSupportFragmentManager().findFragmentByTag("rec_dialog");
+            if (prev != null) {
+                ft.remove(prev);
+            }
+            ServiceOrdersDialogFragment newFragment = ServiceOrdersDialogFragment.newInstance(getActivity(), setupList(autopart_receiving_ids));
+            newFragment.show(getActivity().getSupportFragmentManager(), "rec_dialog");
+        } else
+            Toast.makeText(getContext(), R.string.toast_no_orders, Toast.LENGTH_SHORT).show();
+
+    }
+
+    private ArrayList setupList(List lines) {
+
+        ArrayList<Order> ordenes = new ArrayList<Order>();
+        if (lines.size() > 0) {
+            for (int i = 0; i < lines.size(); i++) {
+                String l = lines.get(i).toString();
+                System.out.println(l);
+                String name = "";
+                String fecha = "";
+                int id = 1;
+//              Nombre
+                Pattern patternName = Pattern.compile("\\sname=(.*?),");
+                Matcher matcherName = patternName.matcher(l);
+                if (matcherName.find())
+                    name = matcherName.group(1);
+
+//              Fecha
+                Pattern patternFecha = Pattern.compile("\\screate_date=(.*?)\\s");
+                Matcher matcherFecha = patternFecha.matcher(l);
+                if (matcherFecha.find())
+                    fecha = matcherFecha.group(1);
+
+                Pattern patternId = Pattern.compile("\\s_id=(.*?),");
+                Matcher matcherId = patternId.matcher(l);
+                if (matcherId.find())
+                    id = Integer.parseInt(matcherId.group(1));
+
+                ordenes.add(new Order(name, fecha, id));
+            }
+
+        }
+        return ordenes;
+    }
+
 
 }

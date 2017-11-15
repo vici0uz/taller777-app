@@ -86,4 +86,5 @@
     <string name="label_processed">Hecho</string>
     <string name="toast_not_processed">Primero debe almacenar los autorepuestos!</string>
     <string name="menu_to_receive">Ordenes de Repuestos</string>
+    <string name="toast_no_orders">Sin ordenes de recepción.</string>
 </resources>

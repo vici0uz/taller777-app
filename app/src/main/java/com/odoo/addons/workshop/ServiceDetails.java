@@ -163,7 +163,7 @@ public class ServiceDetails extends OdooCompatActivity implements View.OnClickLi
                     ServiceOrdersDialogFragment newFragment = ServiceOrdersDialogFragment.newInstance(this, setupList(autopart_receiving_ids));
                     newFragment.show(getSupportFragmentManager(), "rec_dialog");
                 } else
-                    Toast.makeText(app, "No Receiving Orders", Toast.LENGTH_LONG).show();
+                    Toast.makeText(app, R.string.toast_no_orders, Toast.LENGTH_LONG).show();
 
                 break;
 

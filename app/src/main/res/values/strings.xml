@@ -49,4 +49,5 @@
     <string name="label_processed">Done</string>
     <string name="toast_not_processed">Autoparts not located</string>
     <string name="menu_to_receive">Receive Orders</string>
+    <string name="toast_no_orders">No Receiving Orders</string>
 </resources>
