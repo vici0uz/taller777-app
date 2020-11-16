@@ -218,7 +218,7 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
 
     @Override
     public void onSearchViewClose() {
-
+        //do nothing
     }
 
     @Override
@@ -289,7 +289,7 @@ public class WServices extends BaseFragment implements OCursorListAdapter.OnView
         }
         loadDialog(data);
 
-        return false;
+        return true;
     }
 
 

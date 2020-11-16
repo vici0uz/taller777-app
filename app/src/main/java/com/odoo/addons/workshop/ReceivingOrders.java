@@ -9,6 +9,8 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,6 +21,7 @@ import com.odoo.R;
 import com.odoo.addons.workshop.models.WorkshopAutopartReceiving;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.support.addons.fragment.BaseFragment;
+import com.odoo.core.support.addons.fragment.IOnSearchViewChangeListener;
 import com.odoo.core.support.addons.fragment.ISyncStatusObserverListener;
 import com.odoo.core.support.drawer.ODrawerItem;
 import com.odoo.core.support.list.OCursorListAdapter;
@@ -34,7 +37,7 @@ import java.util.List;
  */
 
 public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.OnViewBindListener, View.OnClickListener, LoaderManager.LoaderCallbacks<Cursor>, SwipeRefreshLayout.OnRefreshListener,
-        AdapterView.OnItemClickListener, ISyncStatusObserverListener {
+        AdapterView.OnItemClickListener, ISyncStatusObserverListener, IOnSearchViewChangeListener {
 
     public static final String TAG = ReceivingOrders.class.getSimpleName();
     private View mView;
@@ -45,6 +48,7 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         setHasSyncStatusObserver(TAG, this, db());
         return inflater.inflate(R.layout.common_listview, container, false);
     }
@@ -80,6 +84,7 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
     @Override
     public void onViewBind(View view, Cursor cursor, ODataRow row) {
         OControls.setText(view, R.id.name, row.getString("name"));
+        OControls.setText(view, R.id.partner_id, row.getString("partner_name"));
         if (row.getBoolean("processed")) {
             OControls.setVisible(view, R.id.completado);
         }
@@ -170,5 +175,25 @@ public class ReceivingOrders extends BaseFragment implements OCursorListAdapter.
     @Override
     public void onStatusChange(Boolean refreshing) {
         getLoaderManager().restartLoader(0, null, this);
+    }
+
+    @Override
+    public boolean onSearchViewTextChange(String newFilter) {
+        mCurfilter = newFilter;
+        getLoaderManager().restartLoader(0,null,this);
+        return true;
+    }
+
+    @Override
+    public void onSearchViewClose() {
+
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.menu_partners, menu);
+        setHasSearchView(this, menu, R.id.menu_partner_search );
     }
 }

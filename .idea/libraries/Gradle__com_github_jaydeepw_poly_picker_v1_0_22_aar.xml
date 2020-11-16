@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.jaydeepw:poly-picker:v1.0.22@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poly-picker-v1.0.22.aar/47fc9cb3e70d1bd5d6d50b7ce4f67e9e/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poly-picker-v1.0.22.aar/47fc9cb3e70d1bd5d6d50b7ce4f67e9e/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poly-picker-v1.0.22.aar/47fc9cb3e70d1bd5d6d50b7ce4f67e9e/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/poly-picker-v1.0.22.aar/47fc9cb3e70d1bd5d6d50b7ce4f67e9e/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

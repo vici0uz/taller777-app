@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="com.github.javiersantos:AppUpdater-2.5.4">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/AppUpdater-2.5.4.aar/149de79166d34cfb8d89265fc537f7eb/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/AppUpdater-2.5.4.aar/149de79166d34cfb8d89265fc537f7eb/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

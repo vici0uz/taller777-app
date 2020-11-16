@@ -101,7 +101,6 @@ public class ImagesActivity extends AppCompatActivity {
         userName = extras.getString("username");
         record = workshopService.browse(rowId);
         getSupportActionBar().setTitle(record.getString("name"));
-
         setupViewPager(viewPager);
 
 

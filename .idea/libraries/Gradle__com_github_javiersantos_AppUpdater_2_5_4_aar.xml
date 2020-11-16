@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.javiersantos:AppUpdater:2.5.4@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/AppUpdater-2.5.4.aar/56dc04cbaeea06223b1ecc33d4dd8ec7/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/AppUpdater-2.5.4.aar/56dc04cbaeea06223b1ecc33d4dd8ec7/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/AppUpdater-2.5.4.aar/56dc04cbaeea06223b1ecc33d4dd8ec7/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
